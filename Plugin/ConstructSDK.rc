@@ -66,16 +66,16 @@ END
 
 STRINGTABLE 
 BEGIN
-    OBJ_NAME                "AxeLevel"
+    OBJ_NAME                "BulletML"
     OBJ_AUTHOR              "K. K."
     OBJ_VERSION             "1.00"
-    OBJ_DESCRIPTION         "Level utility plugin for project Axecop"
-    OBJ_DATE                "Feb 2010"
+    OBJ_DESCRIPTION         "BulletML emitter and manager"
+    OBJ_DATE                "May 2010"
     OBJ_COPYRIGHT           "No copyright"
     OBJ_WEB                 "www.paahdin.com"
     OBJ_EMAIL               "fanmail@paahdin.com"
     IDS_CATEGORY            "Game"
-    IDS_LICENSE             "No license"
+    IDS_LICENSE             "Licensed to kill"
 END
 
 #endif    // English (U.S.) resources
