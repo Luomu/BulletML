@@ -1,5 +1,7 @@
 // Include StdAfx.h
 #include "StdAfx.h"
+#include "Bullet.h"
+#include <boost/foreach.hpp>
 
 #ifdef RUN_ONLY
 
@@ -9,7 +11,19 @@
 // leave it blank if your plugin doesn't draw anything.  This is not called when OF_NODRAW is set.
 void ExtObject::Draw()
 {
-	// Don't draw anything
+	CRunLayer* pLayer = pRuntime->GetLayer(pLayout, info.layer);
+	float totalZoom = pLayout->zoomX * pLayer->zoomXoffset;
+
+	cr::color col(RGB(255,100,0));
+	float oldptsize = renderer->GetPointSize();
+	renderer->SetPointSize(10.0f * totalZoom);
+	renderer->SetTexture(NULL);
+	BOOST_FOREACH(const Bullet& bullet, runner.Bullets())
+	{
+		renderer->Point(cr::point(bullet.x, bullet.y), col);
+	}
+	renderer->SetPointSize(oldptsize);
+
 }
 
 #else // RUN_ONLY

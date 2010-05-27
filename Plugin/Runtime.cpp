@@ -3,6 +3,8 @@
 
 // Include StdAfx
 #include "StdAfx.h"
+#include "Bullet.h"
+#include <boost/foreach.hpp>
 
 //////////////////////////////////////////////////////////////////////////////////
 // Runtime functions
@@ -56,7 +58,12 @@ ExtObject::~ExtObject()
 // Return 1 (do not call again) or 0 (continue calling)
 BOOL ExtObject::OnFrame()
 {
-	return 1;	// Do not call again
+	timeDelta = pRuntime->GetTimeDelta();
+	//if (timeDelta > 0.5f)
+	//	timeDelta = 0.0f;
+	runner.run();
+
+	return 0;	// Do not call again
 }
 
 // Called every frame, after the events and before drawing, for you to update your object if necessary

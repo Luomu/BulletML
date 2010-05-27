@@ -62,9 +62,6 @@ void EditExt::OnPropertiesUpdate()
 // When the object is inserted to the layout editor by the user.
 void EditExt::OnPut()
 {
-	// Default value for the property
-	//myValue = 50;
-
 	// Default object size
 	pInfo->objectWidth = 64;
 	pInfo->objectHeight = 64;
