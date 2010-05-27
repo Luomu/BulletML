@@ -1,22 +1,31 @@
 #include "stdafx.h"
 #include "BulletRunner.h"
 #include "Bullet.h"
+#include <boost/foreach.hpp>
 
 BulletRunner::BulletRunner(void)
 {
 	//Create some bullets
-	bullets.push_back(Bullet(10, 10));
-	bullets.push_back(Bullet(100, 100));
-	bullets.push_back(Bullet(50, 50));
+	/*for(int i = 0; i < 100; ++i)
+	{
+		bullets.push_back(Bullet(i * 12, 50));
+	}*/
 }
 
 BulletRunner::~BulletRunner(void)
 {
 }
 
-void BulletRunner::run()
+void BulletRunner::run(float timeDelta)
 {
+	BOOST_FOREACH(Bullet& bullet, Bullets())
+	{
+		bullet.step(timeDelta);
+		if(bullet.finished())
+		{
 
+		}
+	}
 }
 
 BulletList& BulletRunner::Bullets()

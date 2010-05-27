@@ -9,9 +9,12 @@ class BulletRunner
 public:
 	BulletRunner(void);
 	~BulletRunner(void);
-	void run();
+	void run(float timeDelta = 0.5f);
 
 	BulletList& Bullets();
+
+protected:
+	void doFire();
 
 private:
 	BulletList bullets;
