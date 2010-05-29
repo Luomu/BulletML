@@ -1,8 +1,5 @@
 #pragma once
-
-class Bullet;
-
-typedef std::list<Bullet> BulletList;
+#include "Bullet.h"
 
 class BulletRunner
 {

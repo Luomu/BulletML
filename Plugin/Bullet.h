@@ -4,7 +4,12 @@
 #include "Tree.h"
 #include "Action.h"
 
+class Bullet;
+
 typedef std::list<Action> ActionList;
+typedef Bullet* BulletPtr;
+typedef std::list<BulletPtr> BulletList;
+typedef std::list<BulletPtr>::iterator BulletIterator;
 
 class Bullet : public Node
 {
@@ -21,7 +26,7 @@ public:
 		accY_(0.f)
 	{ }
 
-	void step(float timedelta = 0.5f);
+	BulletList* step(float timedelta = 0.5f);
 	void vanish();
 
 	bool finished() const { return finished_; }

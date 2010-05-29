@@ -6,26 +6,36 @@
 BulletRunner::BulletRunner(void)
 {
 	//Create some bullets
-	/*for(int i = 0; i < 100; ++i)
+	for(int i = 0; i < 100; ++i)
 	{
-		bullets.push_back(Bullet(i * 12, 50));
-	}*/
+		bullets.push_back(new Bullet(i * 12, 50));
+	}
 }
 
 BulletRunner::~BulletRunner(void)
 {
+	bullets.clear();
 }
 
 void BulletRunner::run(float timeDelta)
 {
-	BOOST_FOREACH(Bullet& bullet, Bullets())
+	BOOST_FOREACH(BulletPtr bullet, Bullets())
 	{
-		bullet.step(timeDelta);
-		if(bullet.finished())
-		{
-
-		}
+		BulletList* newbullets =  bullet->step(timeDelta);
+		if(newbullets != 0)
+			Bullets().merge(*newbullets);
+		delete newbullets;
 	}
+	//erase expired
+	BulletIterator b = Bullets().begin();
+	for(; b != Bullets().end(); )
+	{
+		if((*b)->finished())
+			b = Bullets().erase(b);
+		else
+			b++;
+	}
+
 }
 
 BulletList& BulletRunner::Bullets()
