@@ -2,6 +2,9 @@
 #define BULLET_H
 
 #include "Tree.h"
+#include "Action.h"
+
+typedef std::list<Action> ActionList;
 
 class Bullet : public Node
 {
@@ -19,6 +22,8 @@ public:
 	{ }
 
 	void step(float timedelta = 0.5f);
+	void vanish();
+
 	bool finished() const { return finished_; }
 	bool vanished() const { return finished_; }
 	int x() const { return x_; }
@@ -32,6 +37,7 @@ private:
 	float accX_;
 	float accY_;
 	float dir_;
+	ActionList actions_;
 };
 
 #endif

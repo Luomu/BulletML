@@ -13,8 +13,8 @@ public:
 	~Action(void)
 	{
 	}
-protected:
-	virtual Do() = 0;
+
+	virtual void step() {} //= 0;
 };
 
 //fires a bullet
