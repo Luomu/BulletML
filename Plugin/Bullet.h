@@ -3,11 +3,10 @@
 
 #include "Tree.h"
 #include "Action.h"
+#include <boost/shared_ptr.hpp>
 
 class Bullet;
-
-typedef std::list<Action> ActionList;
-typedef Bullet* BulletPtr;
+typedef boost::shared_ptr<Bullet> BulletPtr;
 typedef std::list<BulletPtr> BulletList;
 typedef std::list<BulletPtr>::iterator BulletIterator;
 
@@ -28,6 +27,7 @@ public:
 
 	BulletList* step(float timedelta = 0.5f);
 	void vanish();
+	void addAction(const Action&);
 
 	bool finished() const { return finished_; }
 	bool vanished() const { return finished_; }

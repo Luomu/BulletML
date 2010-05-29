@@ -3,12 +3,19 @@
 #include "Bullet.h"
 #include <boost/foreach.hpp>
 
+static int duh = 0;
 BulletRunner::BulletRunner(void)
 {
 	//Create some bullets
 	for(int i = 0; i < 100; ++i)
 	{
-		bullets.push_back(new Bullet(i * 12, 50));
+		BulletPtr b(new Bullet(i * 12, 50));
+		if(duh < 3)
+		{
+			b->addAction(Fire(5, 4));
+			duh++;
+		}
+		bullets.push_back(b);
 	}
 }
 

@@ -1,10 +1,9 @@
 #include "stdafx.h"
+#include "Action.h"
 #include "Bullet.h"
 #include <boost/foreach.hpp>
-#include "Action.h"
 
 //Updates position, runs actions, returns any new bullets created
-static int abloo = 0;
 BulletList* Bullet::step(float timeDelta)
 {
 	BulletList* newbullets = 0;
@@ -17,8 +16,7 @@ BulletList* Bullet::step(float timeDelta)
 	x_ += (accX_ + sin(dir_) * speed_) * timeDelta;
 	y_ += (-accY_ + cos(dir_) * speed_) * timeDelta;
 
-	if(y() > 400)
-		vanish();
+	//TODO: die if lifetime or range exceeded
 
 	//return any new created bullets
 	return newbullets;
@@ -28,4 +26,9 @@ BulletList* Bullet::step(float timeDelta)
 void Bullet::vanish()
 {
 	finished_ = true;
+}
+
+void Bullet::addAction(const Action& newact)
+{
+	actions_.push_back(newact);
 }
