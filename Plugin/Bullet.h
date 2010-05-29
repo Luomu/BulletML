@@ -14,6 +14,7 @@ class Bullet : public Node
 {
 	friend class ExtObject;
 	friend class EditExt;
+	friend class Fire;
 public:
 	Bullet(int xpos, int ypos) :
 		x_(xpos),
@@ -25,14 +26,18 @@ public:
 		accY_(0.f)
 	{ }
 
+	~Bullet();
+
 	BulletList* step(float timedelta = 0.5f);
 	void vanish();
-	void addAction(const Action&);
+	void addAction(Action*);
 
 	bool finished() const { return finished_; }
 	bool vanished() const { return finished_; }
 	int x() const { return x_; }
 	int y() const { return y_; }
+	void setX(const int);
+	void setY(const int);
 	float speed() const { return speed_; }
 private:
 	int x_;

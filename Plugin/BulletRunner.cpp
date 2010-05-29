@@ -12,7 +12,7 @@ BulletRunner::BulletRunner(void)
 		BulletPtr b(new Bullet(i * 12, 50));
 		if(duh < 3)
 		{
-			b->addAction(Fire(5, 4));
+			b->addAction(new Fire(b, 5, 4));
 			duh++;
 		}
 		bullets.push_back(b);

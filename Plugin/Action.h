@@ -1,8 +1,11 @@
 #pragma once
 #include "tree.h"
+#include <boost/shared_ptr.hpp>
 
 class Action;
-typedef std::list<Action> ActionList;
+typedef std::list<Action*> ActionList;
+
+class Bullet;
 
 class Action :
 	public Node
@@ -19,16 +22,19 @@ public:
 	}
 
 	virtual void step(); //= 0;
-private:
+protected:
 	int repeat_;
+	boost::shared_ptr<Bullet> owner;
 };
+
+typedef boost::shared_ptr<Bullet> BulletPtr;
 
 //fires a bullet
 class Fire :
 	public Action
 {
 public:
-	Fire(int dir, int speed);
+	Fire(BulletPtr newowner, int dir, int speed);
 	virtual void step();
 private:
 	int dir_;
