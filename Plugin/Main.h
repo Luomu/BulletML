@@ -71,9 +71,9 @@ public:
 	// ACTIONS, CONDITIONS AND EXPRESSIONS DEFINITIONS
 #include "..\Common\CommonAceDecl.hpp"
 
-	//long cMyCondition(LPVAL params);
+	long cFinished(LPVAL params);
 
-	//long aMyAction(LPVAL params);
+	long aRestart(LPVAL params);
 
 	//long eMyExpression(LPVAL params, ExpReturn& ret);
 

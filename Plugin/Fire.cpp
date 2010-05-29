@@ -1,6 +1,8 @@
+#include "stdafx.h"
 #include "Bullet.h"
 #include "Action.h"
 #include "SubAction.h"
+#include "Fire.h"
 
 FireDef::FireDef(const std::string& label,
 				 const BulletDirection& dir,
@@ -11,8 +13,8 @@ FireDef::FireDef(const std::string& label,
 {
 }
 
-void FireDef::call(BulletPtr owner, ActionPtr action,
-		float params, float rank, BulletPtrList& created)
+void FireDef::call(BulletPtr owner, Action& action,
+		float params, float rank, BulletList& created)
 {
 	//default parameters for the new bullet here
 	float speed = 0.f;
@@ -21,12 +23,12 @@ void FireDef::call(BulletPtr owner, ActionPtr action,
 
 	if(speed_.type == SpeedType::absolute)
 		speed = speed_.speed;
-	else if(speed._type == SpeedType::relative)
+	else if(speed_.type == SpeedType::relative)
 		speed = owner->speed() + speed_.speed;
-	else if(speed._type == SpeedType::sequence)
-		speed += action->previousFireSpeed();
+	else if(speed_.type == SpeedType::sequence)
+		speed += action.previousFireSpeed();
 	else
 		speed = 100.f;
-	//action->setPreviousFireSpeed(speed);
+	action.setPreviousFireSpeed(speed);
 	created.push_back(BulletPtr(new Bullet(0, 0)));
 }

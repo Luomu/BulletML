@@ -10,9 +10,11 @@ public:
 
 	BulletList& Bullets();
 
-protected:
-	void doFire();
+	bool unreportedFinish;
+	bool finished() const { return finished_; }
 
 private:
+	bool finished_;
 	BulletList bullets;
+	int type; // none | vertical | horizontal
 };

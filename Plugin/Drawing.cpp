@@ -21,7 +21,7 @@ void ExtObject::Draw()
 	BOOST_FOREACH(const BulletPtr bullet, runner.Bullets())
 	{
 		if(!bullet->finished())
-			renderer->Point(cr::point(bullet->x(), bullet->y()), col);
+			renderer->Point(cr::point(bullet->x() + info.x, bullet->y() + info.y), col);
 	}
 	renderer->SetPointSize(oldptsize);
 

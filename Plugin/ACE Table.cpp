@@ -25,6 +25,7 @@ void DefineACES(MicroAceTime* at)
 	// Format:
 	// ADDCND(List name, Category, Display string, Function address, Script name, Flags)
 	//ADDCND("My condition", "My category", "%o My condition", &ExtObject::cMyCondition, "MyCondition", 0);
+	ADDCND("Finished", "BulletML", "%o finished", &ExtObject::cFinished, "Finished", 0);
 
 	/////////////////////////////
 	// Actions
@@ -32,6 +33,7 @@ void DefineACES(MicroAceTime* at)
 	// ADDCND(List name, Category, Display string, Function address, Script name, Flags)
 	//ADDPARAM(PARAM_VALUE, "Example parameter", "Here is an example parameter.");
 	//ADDACT("My action", "My category", "Example action (%0)", &ExtObject::aMyAction, "MyAction", 0);
+	ADDACT("Restart", "BulletML", "Restart", &ExtObject::aRestart, "Restart", 0);
 
 	//Room saving
 	/////////////////////////////

@@ -6,6 +6,6 @@ class SubAction
 public:
 	SubAction(void) {};
 	~SubAction(void) {};
-	virtual void call(BulletPtr owner, ActionPtr action,
-					  float params, float rank, BulletPtrList created) = 0;
+	virtual void call(BulletPtr owner, Action& action,
+					  float params, float rank, BulletList& created) = 0;
 };

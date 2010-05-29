@@ -16,16 +16,7 @@ class Bullet : public Node
 	friend class EditExt;
 	friend class Fire;
 public:
-	Bullet(int xpos, int ypos) :
-		x_(xpos),
-		y_(ypos),
-		finished_(false),
-		speed_(250.f),
-		dir_(0.f),
-		accX_(0.f),
-		accY_(0.f)
-	{ }
-
+	Bullet(int xpos, int ypos);
 	~Bullet();
 
 	BulletList* step(float timedelta = 0.5f);
@@ -38,7 +29,9 @@ public:
 	int y() const { return y_; }
 	void setX(const int);
 	void setY(const int);
+	void setSpeed(const float);
 	float speed() const { return speed_; }
+	void setDirection(const float);
 private:
 	int x_;
 	int y_;
@@ -47,7 +40,7 @@ private:
 	float accX_;
 	float accY_;
 	float dir_;
-	ActionList actions_;
+	std::list<Action*> actions_;
 };
 
 #endif
