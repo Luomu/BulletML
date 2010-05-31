@@ -6,6 +6,9 @@ class Bullet;
 typedef boost::shared_ptr<Bullet> BulletPtr;
 typedef std::list<BulletPtr> BulletList;
 
+class Action;
+typedef std::list<Action*> ActionList;
+
 class Action
 {
 public:
@@ -25,5 +28,3 @@ private:
 	float previousFireSpeed_;
 	SubActionList actions_;
 };
-
-typedef std::list<Action*> ActionList;

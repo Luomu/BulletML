@@ -3,6 +3,7 @@
 #include "Action.h"
 #include "SubAction.h"
 #include "Fire.h"
+#include "ChangeDir.h"
 
 FireDef::FireDef(const std::string& label,
 				 const BulletDirection& dir,
@@ -31,6 +32,12 @@ void FireDef::call(BulletPtr owner, Action& action,
 	else
 		speed = 100.f;
 	action.setPreviousFireSpeed(speed);
-	created->push_back(BulletPtr(new Bullet(0, 0, 250)));
+	BulletPtr newb(new Bullet(0, 0, 250));
+	//Adding a test action
+	Action* faction = new Action(newb);
+	ChangeDir* bar = new ChangeDir(BulletDirection(0, 0.f), 120);
+	faction->actions().push_back(bar);
+	newb->actions().push_back(faction);
+	created->push_back(newb);
 	finished_ = true;
 }

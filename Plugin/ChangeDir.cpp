@@ -22,5 +22,6 @@ ChangeDir::~ChangeDir(void)
 void ChangeDir::call(BulletPtr owner, Action& action,
 		float params, float rank, BulletList* created)
 {
-	
+	owner->setDirection(owner->direction() + 1.f);
+	finished_ = true;
 }

@@ -32,6 +32,7 @@ public:
 	void setSpeed(const float);
 	float speed() const { return speed_; }
 	void setDirection(const float);
+	float direction() const { return dir_; }
 	ActionList& actions() { return actions_; }
 private:
 	int x_;

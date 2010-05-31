@@ -8,7 +8,7 @@ typedef std::list<BulletPtr> BulletList;
 class SubAction
 {
 public:
-	SubAction(void) :
+	SubAction() :
 	  finished_(false)
 	{}
 	~SubAction(void) {}

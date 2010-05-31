@@ -2,6 +2,7 @@
 #include "Action.h"
 #include "SubAction.h"
 #include "Fire.h"
+#include "ChangeDir.h"
 #include <boost/foreach.hpp>
 
 Action::Action(BulletPtr newowner) :
@@ -29,22 +30,22 @@ BulletList* Action::step()
 {
 	//run sub-actions
 	//handle repeats and waits
-	BulletList* created = 0;
-	bool actionsDone = false;
+	BulletList* created = new BulletList;
+	//bool actionsDone = false;
 	BOOST_FOREACH(SubAction* action, actions_)
 	{
 		if(action->finished())
 			break;
-		created = new BulletList;
 		action->call(owner_, *this, 0.f, 0.f, created);
-		actionsDone = actionsDone && action->finished();
+		//if(action->finished())
+		//	actionsDone = true;
 	}
-	if(actionsDone)
-		finished_ = true;
+	//if(actionsDone)
+	//	finished_ = true;
 	return created;
 }
 
-inline SubActionList& Action::actions()
+SubActionList& Action::actions()
 {
 	return actions_;
 }
