@@ -7,6 +7,7 @@
 FireDef::FireDef(const std::string& label,
 				 const BulletDirection& dir,
 				 const FireSpeed& speed) :
+	SubAction(),
 	label_(label),
 	direction_(dir),
 	speed_(speed)
@@ -31,4 +32,5 @@ void FireDef::call(BulletPtr owner, Action& action,
 		speed = 100.f;
 	action.setPreviousFireSpeed(speed);
 	created->push_back(BulletPtr(new Bullet(0, 0, 250)));
+	finished_ = true;
 }

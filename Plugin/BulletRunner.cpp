@@ -16,11 +16,12 @@ BulletRunner::~BulletRunner(void)
 	bullets.clear();
 }
 
-static int blb = 0;
 void BulletRunner::run(float timeDelta)
 {
 	BOOST_FOREACH(BulletPtr bullet, Bullets())
 	{
+		if(bullet->finished())
+			break;
 		BulletList* newbullets = 0;
 		newbullets =  bullet->step(timeDelta);
 		if(newbullets != 0)

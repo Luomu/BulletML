@@ -22,6 +22,8 @@ BulletList* Bullet::step(float timeDelta)
 	//run all actions (scripts) this bullet might have
 	BOOST_FOREACH(Action* action, actions_)
 	{
+		if(action->finished())
+			break;
 		newbullets = action->step();
 	}
 
@@ -42,7 +44,6 @@ Bullet::~Bullet()
 		delete *tmp;
 		actions_.erase(tmp);
 	}
-
 }
 
 //Vanish this bullet and stop all actions

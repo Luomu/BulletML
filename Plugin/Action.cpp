@@ -9,23 +9,38 @@ Action::Action(BulletPtr newowner) :
 	repeat_(0),
 	owner_(newowner)
 {
-	FireDef foo("temp",
-				BulletDirection(DirectionType::absolute, 0.f),
-				FireSpeed(SpeedType::absolute, 200.f));
+	FireDef* foo = new FireDef("temp",
+							   BulletDirection(DirectionType::absolute, 0.f),
+							   FireSpeed(SpeedType::absolute, 200.f));
 	actions_.push_back(foo);
 }
 
-static int blah = 0;
+Action::~Action()
+{
+	for (SubActionList::iterator i = actions_.begin(), e = actions_.end(); i != e; )
+	{
+		SubActionList::iterator tmp(i++);
+		delete *tmp;
+		actions_.erase(tmp);
+	}
+}
+
 BulletList* Action::step()
 {
 	//run sub-actions
 	//handle repeats and waits
 	BulletList* created = 0;
-	BOOST_FOREACH(SubAction& action, actions_)
+	bool actionsDone = false;
+	BOOST_FOREACH(SubAction* action, actions_)
 	{
+		if(action->finished())
+			break;
 		created = new BulletList;
-		action.call(owner_, *this, 0.f, 0.f, created);
+		action->call(owner_, *this, 0.f, 0.f, created);
+		actionsDone = actionsDone && action->finished();
 	}
+	if(actionsDone)
+		finished_ = true;
 	return created;
 }
 

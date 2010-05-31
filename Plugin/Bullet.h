@@ -32,7 +32,7 @@ public:
 	void setSpeed(const float);
 	float speed() const { return speed_; }
 	void setDirection(const float);
-	std::list<Action*>& actions() { return actions_; }
+	ActionList& actions() { return actions_; }
 private:
 	int x_;
 	int y_;
@@ -41,7 +41,7 @@ private:
 	float accX_;
 	float accY_;
 	float dir_;
-	std::list<Action*> actions_;
+	ActionList actions_;
 };
 
 #endif
