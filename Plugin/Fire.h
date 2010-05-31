@@ -1,21 +1,5 @@
 #pragma once
-
 #include "SubAction.h"
-
-struct BulletDirection
-{
-	BulletDirection(int newtype, float newangle) :
-		type(newtype),
-		angle(newangle)
-	{}
-	int type; //aim, absolute, relative, sequence
-	float angle;
-};
-
-namespace DirectionType
-{
-	enum DirectionTypes { aim, absolute, relative, sequence };
-};
 
 struct FireSpeed
 {
