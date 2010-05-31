@@ -3,12 +3,12 @@
 #include "Bullet.h"
 #include <boost/foreach.hpp>
 
-Bullet::Bullet(int xpos, int ypos) :
+Bullet::Bullet(int xpos, int ypos, float speed, float dir) :
 	x_(xpos),
 	y_(ypos),
 	finished_(false),
-	speed_(50.f),
-	dir_(0.f),
+	speed_(speed),
+	dir_(dir),
 	accX_(0.f),
 	accY_(0.f)
 {
@@ -22,7 +22,7 @@ BulletList* Bullet::step(float timeDelta)
 	//run all actions (scripts) this bullet might have
 	BOOST_FOREACH(Action* action, actions_)
 	{
-		action->step();
+		newbullets = action->step();
 	}
 
 	x_ += (accX_ + sin(dir_) * speed_) * timeDelta;

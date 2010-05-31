@@ -14,7 +14,7 @@ FireDef::FireDef(const std::string& label,
 }
 
 void FireDef::call(BulletPtr owner, Action& action,
-		float params, float rank, BulletList& created)
+		float params, float rank, BulletList* created)
 {
 	//default parameters for the new bullet here
 	float speed = 0.f;
@@ -30,5 +30,5 @@ void FireDef::call(BulletPtr owner, Action& action,
 	else
 		speed = 100.f;
 	action.setPreviousFireSpeed(speed);
-	created.push_back(BulletPtr(new Bullet(0, 0)));
+	created->push_back(BulletPtr(new Bullet(0, 0, 250)));
 }

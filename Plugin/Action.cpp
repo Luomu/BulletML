@@ -1,19 +1,35 @@
 #include "stdafx.h"
 #include "Action.h"
+#include "SubAction.h"
 #include "Fire.h"
+#include <boost/foreach.hpp>
+
+Action::Action(BulletPtr newowner) :
+	finished_(false),
+	repeat_(0),
+	owner_(newowner)
+{
+	FireDef foo("temp",
+				BulletDirection(DirectionType::absolute, 0.f),
+				FireSpeed(SpeedType::absolute, 200.f));
+	actions_.push_back(foo);
+}
 
 static int blah = 0;
-void Action::step()
+BulletList* Action::step()
 {
 	//run sub-actions
 	//handle repeats and waits
-	if(blah == 0)
+	BulletList* created = 0;
+	BOOST_FOREACH(SubAction& action, actions_)
 	{
-		BulletList created;
-		FireDef foo("temp",
-					BulletDirection(DirectionType::absolute, 0.f),
-					FireSpeed(SpeedType::absolute, 200.f));
-		foo.call(owner_, *this, 0.f, 0.f, created);
-		blah = 1;
+		created = new BulletList;
+		action.call(owner_, *this, 0.f, 0.f, created);
 	}
+	return created;
+}
+
+inline SubActionList& Action::actions()
+{
+	return actions_;
 }

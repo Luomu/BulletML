@@ -7,5 +7,7 @@ public:
 	SubAction(void) {};
 	~SubAction(void) {};
 	virtual void call(BulletPtr owner, Action& action,
-					  float params, float rank, BulletList& created) = 0;
+					  float params, float rank, BulletList* created) = 0;
 };
+
+typedef std::list<SubAction> SubActionList;

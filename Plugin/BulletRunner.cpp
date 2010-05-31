@@ -6,7 +6,9 @@
 BulletRunner::BulletRunner(void) :
 	unreportedFinish(false)
 {
-
+	BulletPtr topact = BulletPtr(new Bullet(0, 0, 0));
+	topact->actions().push_back(new Action(topact));
+	Bullets().push_back(topact);
 }
 
 BulletRunner::~BulletRunner(void)
@@ -14,11 +16,13 @@ BulletRunner::~BulletRunner(void)
 	bullets.clear();
 }
 
+static int blb = 0;
 void BulletRunner::run(float timeDelta)
 {
 	BOOST_FOREACH(BulletPtr bullet, Bullets())
 	{
-		BulletList* newbullets =  bullet->step(timeDelta);
+		BulletList* newbullets = 0;
+		newbullets =  bullet->step(timeDelta);
 		if(newbullets != 0)
 			Bullets().merge(*newbullets);
 		delete newbullets;

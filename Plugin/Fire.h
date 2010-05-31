@@ -41,7 +41,7 @@ class FireDef : public SubAction
 public:
 	FireDef(const std::string& label, const BulletDirection& dir, const FireSpeed& speed);
 	void call(BulletPtr owner, Action& action,
-			  float params, float rank, BulletList& created);
+			  float params, float rank, BulletList* created);
 private:
 	std::string label_;
 	BulletDirection direction_;
