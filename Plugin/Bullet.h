@@ -1,48 +1,16 @@
-#ifndef BULLET_H
-#define BULLET_H
+#pragma once
+#include "bulletml/bulletmlparser.h"
+#include "bulletrunner.h"
 
-#include "Tree.h"
-#include "Action.h"
-#include <boost/shared_ptr.hpp>
+struct Bullet {
+	int dir, spd;
+	BulletCommand* cmd;
+	double rank;
+	int spc;
+	int type;
+	int shield;
+	int cnt, color;
+	int hit;
 
-class Bullet;
-typedef boost::shared_ptr<Bullet> BulletPtr;
-typedef std::list<BulletPtr> BulletList;
-typedef std::list<BulletPtr>::iterator BulletIterator;
-
-class Bullet : public Node
-{
-	friend class ExtObject;
-	friend class EditExt;
-	friend class Fire;
-public:
-	Bullet(int xpos, int ypos, float speed = 250.f, float dir = 0.f);
-	~Bullet();
-
-	BulletList* step(float timedelta = 0.5f);
-	void vanish();
-	void addAction(Action*);
-
-	bool finished() const { return finished_; }
-	bool vanished() const { return finished_; }
-	int x() const { return x_; }
-	int y() const { return y_; }
-	void setX(const int);
-	void setY(const int);
-	void setSpeed(const float);
-	float speed() const { return speed_; }
-	void setDirection(const float);
-	float direction() const { return dir_; }
-	ActionList& actions() { return actions_; }
-private:
-	int x_;
-	int y_;
-	bool finished_;
-	float speed_;
-	float accX_;
-	float accY_;
-	float dir_;
-	ActionList actions_;
+	BulletMLParser* parser;
 };
-
-#endif

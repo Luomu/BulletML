@@ -1,20 +1,29 @@
 #pragma once
+#include "bulletml/bulletmlparser.h"
+#include "bulletml/bulletmlparser-tinyxml.h"
+#include "bulletml/bulletmlrunner.h"
 #include "Bullet.h"
 
-class BulletRunner
+class BulletCommand : public BulletMLRunner
 {
 public:
-	BulletRunner(void);
-	~BulletRunner(void);
-	void run(float timeDelta = 0.5f);
+	BulletCommand(BulletMLParser* parser, Bullet* b);
+	BulletCommand(BulletMLState* state, Bullet* b);
+	virtual ~BulletCommand();
 
-	BulletList& Bullets();
+	virtual double getBulletDirection();
+	virtual double getAimDirection();
+	virtual double getBulletSpeed();
+	virtual double getDefaultSpeed();
+	virtual double getRank();
+	virtual void createSimpleBullet(double direction, double speed);
+	virtual void createBullet(BulletMLState* state, double direction, double speed);
+	virtual int getTurn();
+	virtual void doVanish();
 
-	bool unreportedFinish;
-	bool finished() const { return finished_; }
+	virtual void doChangeDirection(double d);
+	virtual void doChangeSpeed(double s);
 
 private:
-	bool finished_;
-	BulletList bullets;
-	int type; // none | vertical | horizontal
+	Bullet* bullet;
 };

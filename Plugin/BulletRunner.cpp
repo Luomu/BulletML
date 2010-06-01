@@ -1,45 +1,36 @@
-#include "stdafx.h"
 #include "BulletRunner.h"
-#include "Bullet.h"
-#include <boost/foreach.hpp>
 
-BulletRunner::BulletRunner(void) :
-	unreportedFinish(false)
+BulletCommand::BulletCommand(BulletMLParser *parser, Bullet *b)
+: BulletMLRunner(parser)
 {
-	BulletPtr topact = BulletPtr(new Bullet(0, 0, 0));
-	topact->actions().push_back(new Action(topact));
-	Bullets().push_back(topact);
+	bullet = b;
 }
 
-BulletRunner::~BulletRunner(void)
+BulletCommand::BulletCommand(BulletMLState *state, Bullet *b)
+: BulletMLRunner(state)
 {
-	bullets.clear();
+	bullet = b;
 }
 
-void BulletRunner::run(float timeDelta)
+BulletCommand::~BulletCommand() {}
+
+double BulletCommand::getBulletDirection()
 {
-	BOOST_FOREACH(BulletPtr bullet, Bullets())
-	{
-		if(bullet->finished())
-			break;
-		BulletList* newbullets = 0;
-		newbullets =  bullet->step(timeDelta);
-		if(newbullets != 0)
-			Bullets().merge(*newbullets);
-		delete newbullets;
-	}
-	//erase expired
-	BulletIterator b = Bullets().begin();
-	for(; b != Bullets().end(); )
-	{
-		if((*b)->finished())
-			b = Bullets().erase(b);
-		else
-			b++;
-	}
+	return 0;
 }
 
-BulletList& BulletRunner::Bullets()
+double BulletCommand::getDefaultSpeed()
 {
-	return bullets;
+	return 1;
+}
+
+double BulletCommand::getRank()
+{
+	return bullet->rank;
+}
+
+void BulletCommand::createSimpleBullet(double direction, double speed)
+{
+	int dir = 0;
+	//manager->addfoenormalbullet...
 }
