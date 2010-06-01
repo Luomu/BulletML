@@ -2,7 +2,9 @@
 #include "bulletml/bulletmlparser.h"
 #include "bulletrunner.h"
 
-struct Bullet {
+class Bullet {
+public:
+	int x, y;
 	int dir, spd;
 	BulletCommand* cmd;
 	double rank;

@@ -3,7 +3,6 @@
 
 // Include StdAfx
 #include "StdAfx.h"
-#include "Bullet.h"
 #include <boost/foreach.hpp>
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -61,7 +60,7 @@ BOOL ExtObject::OnFrame()
 	timeDelta = pRuntime->GetTimeDelta();
 	/*if (timeDelta > 0.5f)
 		timeDelta = 0.0f;*/
-	runner.run(timeDelta);
+	//runner.run(timeDelta);
 
 	return 0;	// Do not call again
 }

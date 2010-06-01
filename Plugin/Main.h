@@ -22,8 +22,7 @@
 #define IDE_FLAGS 	OF_NOCOMMONDEBUG | OF_NOSIZE
 
 #include "..\Common\ExpReturn.hpp"
-#include "Bullet.h"
-#include "BulletRunner.h"
+#include "BulletManager.h"
 
 #define OBJECTRECT CRect(editObject->objectX, editObject->objectY, editObject->objectX + editObject->objectWidth, editObject->objectY + editObject->objectHeight)
 
@@ -82,7 +81,7 @@ public:
 
 	// Use when private variables (OF_PRIVATEVARIABLES) are enabled.
 	float timeDelta;
-	BulletRunner runner;
+	BulletManager manager;
 };
 
 //////////// EDITTIME INFO ////////////

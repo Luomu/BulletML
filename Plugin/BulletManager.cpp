@@ -1,9 +1,10 @@
+#include "stdafx.h"
 #include "BulletManager.h"
 #define NOT_EXIST 0
 
 void BulletManager::move()
 {
-	foreach(Bullet* b in bullets)
+	/*foreach(Bullet* b in bullets)
 	{
 		if(b->spc == NOT_EXIST) continue;
 		if(b->cmd)
@@ -20,5 +21,5 @@ void BulletManager::move()
 			}
 		}
 		//hit check, out of bounds check...
-	}
+	}*/
 }

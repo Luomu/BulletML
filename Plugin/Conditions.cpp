@@ -6,10 +6,10 @@
 //////////////////////////////////////////////////////////////////////////////////
 long ExtObject::cFinished(LPVAL params)
 {
-	if(runner.unreportedFinish)
+	/*if(runner.unreportedFinish)
 	{
 		runner.unreportedFinish = false;
 		return 1;
-	}
+	}*/
 	return 0;
 }

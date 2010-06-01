@@ -4,6 +4,8 @@
 #include "bulletml/bulletmlrunner.h"
 #include "Bullet.h"
 
+class Bullet;
+
 class BulletCommand : public BulletMLRunner
 {
 public:

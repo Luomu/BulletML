@@ -18,10 +18,9 @@ void ExtObject::Draw()
 	float oldptsize = renderer->GetPointSize();
 	renderer->SetPointSize(10.0f * totalZoom);
 	renderer->SetTexture(NULL);
-	BOOST_FOREACH(const BulletPtr bullet, runner.Bullets())
+	BOOST_FOREACH(const Bullet* bullet, manager.bullets())
 	{
-		if(!bullet->finished())
-			renderer->Point(cr::point(bullet->x() + info.x, bullet->y() + info.y), col);
+		renderer->Point(cr::point(bullet->x + info.x, bullet->y + info.y), col);
 	}
 	renderer->SetPointSize(oldptsize);
 
