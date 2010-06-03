@@ -38,7 +38,7 @@ double BulletCommand::getBulletSpeed()
 
 double BulletCommand::getDefaultSpeed()
 {
-	return 1;
+	return 250;
 }
 
 double BulletCommand::getRank()
@@ -55,7 +55,12 @@ void BulletCommand::createSimpleBullet(double direction, double speed)
 
 void BulletCommand::createBullet(BulletMLState *state, double direction, double speed)
 {
-
+	int dir = static_cast<int>(direction);
+	int spd = static_cast<int>(speed);
+	manager->addActiveBullet(bullet->pos.x,
+							 bullet->pos.y,
+							 bullet->rank,
+							 dir, spd, state);
 }
 
 int BulletCommand::getTurn()

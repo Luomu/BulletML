@@ -17,4 +17,5 @@ Bullet::Bullet()
 	parser = 0;
 	vel.x = 0;
 	vel.y = 0;
+	lifetime = 0;
 }

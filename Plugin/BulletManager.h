@@ -9,8 +9,11 @@ public:
 	~BulletManager();
 	std::list<Bullet*>& bullets() { return bullets_; }
 
-	void move();
+	void move(float timeDelta);
+	void clean();
 	void addSimpleBullet(int x, int y, int speed, int dir);
+	void addActiveBullet(int x, int y, double rank, int dir,
+						 int speed, BulletMLState* state);
 	void removeBullet(Bullet* bullet);
 
 private:

@@ -61,7 +61,8 @@ BOOL ExtObject::OnFrame()
 	/*if (timeDelta > 0.5f)
 		timeDelta = 0.0f;*/
 	//runner.run(timeDelta);
-	manager.move();
+	manager.move(timeDelta);
+	manager.clean();
 
 	return 0;	// Do not call again
 }
