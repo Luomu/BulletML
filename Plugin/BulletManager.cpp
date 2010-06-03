@@ -6,6 +6,7 @@ BulletManager::BulletManager()
 {
 	addSimpleBullet(10, 20, 0);
 	addSimpleBullet(10, 30, 1);
+	addSimpleBullet(30, 30, 10);
 }
 
 BulletManager::~BulletManager()
