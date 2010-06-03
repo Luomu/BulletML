@@ -65,6 +65,8 @@ void EditExt::OnPut()
 	// Default object size
 	pInfo->objectWidth = 64;
 	pInfo->objectHeight = 64;
+	pInfo->originX = 0.5f;
+	pInfo->originY = 0.5f;
 }
 
 
