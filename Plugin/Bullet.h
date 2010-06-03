@@ -17,6 +17,7 @@ public:
 	int shield;
 	int cnt, color;
 	int hit;
+	Vec2 vel; //acc
 
 	BulletMLParser* parser;
 };

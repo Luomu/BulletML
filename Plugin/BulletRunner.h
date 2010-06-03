@@ -2,9 +2,9 @@
 #include "bulletml/bulletmlparser.h"
 #include "bulletml/bulletmlparser-tinyxml.h"
 #include "bulletml/bulletmlrunner.h"
-#include "Bullet.h"
 
 class Bullet;
+class BulletManager;
 
 class BulletCommand : public BulletMLRunner
 {
@@ -25,7 +25,12 @@ public:
 
 	virtual void doChangeDirection(double d);
 	virtual void doChangeSpeed(double s);
+	virtual void doAccelX(double ax);
+	virtual void doAccelY(double ay);
+	virtual double getBulletSpeedX();
+	virtual double getBulletSpeedY();
 
 private:
 	Bullet* bullet;
+	BulletManager* manager;
 };

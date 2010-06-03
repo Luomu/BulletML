@@ -10,7 +10,8 @@ public:
 	std::list<Bullet*>& bullets() { return bullets_; }
 
 	void move();
-	void addSimpleBullet(int x, int y, int speed);
+	void addSimpleBullet(int x, int y, int speed, int dir);
+	void removeBullet(Bullet* bullet);
 
 private:
 	Bullet* getNextBullet();

@@ -15,4 +15,6 @@ Bullet::Bullet()
 	color = 0;
 	hit = 0;
 	parser = 0;
+	vel.x = 0;
+	vel.y = 0;
 }

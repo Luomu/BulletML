@@ -4,9 +4,9 @@
 
 BulletManager::BulletManager()
 {
-	addSimpleBullet(10, 20, 0);
-	addSimpleBullet(10, 30, 1);
-	addSimpleBullet(30, 30, 10);
+	addSimpleBullet(10, 20, 0, 0);
+	addSimpleBullet(10, 30, 1, 0);
+	addSimpleBullet(30, 30, 10, 0);
 }
 
 BulletManager::~BulletManager()
@@ -17,13 +17,14 @@ BulletManager::~BulletManager()
 	}
 }
 
-void BulletManager::addSimpleBullet(int x, int y, int speed)
+void BulletManager::addSimpleBullet(int x, int y, int speed, int direction)
 {
 	Bullet* b = getNextBullet();
 	if(!b) return;
 	b->cmd = 0;
 	b->pos.x = x;
 	b->pos.y = y;
+	b->dir = direction;
 	b->spc = NORMAL_BULLET;
 }
 
@@ -36,7 +37,9 @@ Bullet* BulletManager::getNextBullet()
 
 void BulletManager::move()
 {
-	/*foreach(Bullet* b in bullets)
+	int dx = 0;
+	int dy = 1;
+	BOOST_FOREACH(Bullet* b, bullets_)
 	{
 		if(b->spc == NOT_EXIST) continue;
 		if(b->cmd)
@@ -52,6 +55,14 @@ void BulletManager::move()
 				continue;
 			}
 		}
+		b->pos.x += dx;
+		b->pos.y += dy;
+		b->cnt++;
 		//hit check, out of bounds check...
-	}*/
+	}
+}
+
+void BulletManager::removeBullet(Bullet* b)
+{
+	b->spc = NOT_EXIST;
 }
