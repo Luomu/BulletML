@@ -20,7 +20,7 @@ void ExtObject::Draw()
 	renderer->SetTexture(NULL);
 	BOOST_FOREACH(const Bullet* bullet, manager.bullets())
 	{
-		renderer->Point(cr::point(bullet->x + info.x, bullet->y + info.y), col);
+		renderer->Point(cr::point(bullet->pos.x + info.x, bullet->pos.y + info.y), col);
 	}
 	renderer->SetPointSize(oldptsize);
 

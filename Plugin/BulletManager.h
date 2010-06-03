@@ -5,10 +5,14 @@
 class BulletManager
 {
 public:
+	BulletManager();
+	~BulletManager();
 	std::list<Bullet*>& bullets() { return bullets_; }
 
 	void move();
+	void addSimpleBullet(int x, int y, int speed);
 
 private:
+	Bullet* getNextBullet();
 	std::list<Bullet*> bullets_;
 };
