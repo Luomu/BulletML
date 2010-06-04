@@ -26,6 +26,7 @@ void DefineACES(MicroAceTime* at)
 	// ADDCND(List name, Category, Display string, Function address, Script name, Flags)
 	//ADDCND("My condition", "My category", "%o My condition", &ExtObject::cMyCondition, "MyCondition", 0);
 	ADDCND("Finished", "BulletML", "%o finished", &ExtObject::cFinished, "Finished", 0);
+	ADDCND("On error occurred", "BulletML", "%o On error occurred", &ExtObject::cErrorOccurred, "ErrorOccurred", 0);
 
 	/////////////////////////////
 	// Actions
@@ -41,6 +42,7 @@ void DefineACES(MicroAceTime* at)
 	// ADDEXP(List name, Category, Display string, Function address, Flags)
 	//ADDEXP("My expression", "My category", "MyExpression", &ExtObject::eMyExpression, RETURN_INTEGER);
 	// This line includes your common ACEs as specified in Main.h
+	ADDEXP("Last error string", "BulletML", "LastErrorString", &ExtObject::eErrorString, RETURN_STRING);
 #include "..\Common\CommonAceTable.hpp"
 }
 

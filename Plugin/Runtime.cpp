@@ -13,8 +13,9 @@
 // ExtObject constructor:
 // Only use for class initializer list.  Object initialisation must be done in OnCreate.
 // It is not safe to make runtime calls here: do so in OnCreate.
-ExtObject::ExtObject(initialObject* editObject, VRuntime* pVRuntime)
-: renderer(pVRuntime->pRenderer)
+ExtObject::ExtObject(initialObject* editObject, VRuntime* pVRuntime) :
+	renderer(pVRuntime->pRenderer),
+	unreportedError(false)
 {
 	pRuntime = pVRuntime;
 	info.editObject = editObject;
@@ -46,6 +47,8 @@ void ExtObject::OnCreate()
 
 	// Update bounding box
 	pRuntime->UpdateBoundingBox(this);
+
+	RaiseConstructError(CString("GSV Just Testing"));
 }
 
 // Destructor: called when an instance of your object is destroyed.
@@ -106,6 +109,12 @@ long ExtObject::GetData(int id, void* param)
 long ExtObject::CallFunction(int id, void* param)
 {
 	return 0;
+}
+
+void ExtObject::RaiseConstructError(const CString& error)
+{
+	unreportedError = true;
+	errorString = error;
 }
 #else //ifdef RUN_ONLY
 

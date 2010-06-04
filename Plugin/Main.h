@@ -82,6 +82,13 @@ public:
 	// Use when private variables (OF_PRIVATEVARIABLES) are enabled.
 	float timeDelta;
 	BulletManager manager;
+
+	// Error reporting
+	bool unreportedError;
+	CString errorString;
+	long cErrorOccurred(LPVAL params);
+	long eErrorString(LPVAL params, ExpReturn& ret);
+	void RaiseConstructError(const CString& error);
 };
 
 //////////// EDITTIME INFO ////////////

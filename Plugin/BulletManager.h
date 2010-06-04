@@ -1,6 +1,8 @@
 #pragma once
 #include "Bullet.h"
 
+class BulletMLParser;
+
 //holds the bullets, calls their commands
 class BulletManager
 {
@@ -8,6 +10,7 @@ public:
 	BulletManager();
 	~BulletManager();
 	std::list<Bullet*>& bullets() { return bullets_; }
+	BulletMLParser* parser() const { return parser_; }
 
 	void move(float timeDelta);
 	void clean();
@@ -19,4 +22,5 @@ public:
 private:
 	Bullet* getNextBullet();
 	std::list<Bullet*> bullets_;
+	BulletMLParser* parser_;
 };

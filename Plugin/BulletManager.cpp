@@ -1,13 +1,14 @@
 #include "stdafx.h"
-#include "BulletManager.h"
 #include <boost/foreach.hpp>
+#include "bulletml/bulletmlparser-tinyxml.h"
+#include "BulletManager.h"
 
-BulletManager::BulletManager()
+BulletManager::BulletManager() :
+	parser_(0)
 {
-	addSimpleBullet(0, 0, 100, 0);
-	addSimpleBullet(20, 0, 250, 90);
-	//addSimpleBullet(40, 0, 200, 180);
-	//addSimpleBullet(60, 0, 250, 270);
+	std::string filename("test.xml");
+	parser_ = new BulletMLParserTinyXML(filename);
+	parser_->build();
 }
 
 BulletManager::~BulletManager()

@@ -13,3 +13,13 @@ long ExtObject::cFinished(LPVAL params)
 	}*/
 	return 0;
 }
+
+long ExtObject::cErrorOccurred(LPVAL params)
+{
+	if(unreportedError)
+	{
+		unreportedError = false;
+		return 1;
+	}
+	return 0;
+}
