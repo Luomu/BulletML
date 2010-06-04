@@ -1,6 +1,7 @@
 #include "stdafx.h"
-#include "BulletRunner.h"
+#include "bulletml/bulletmlerror.h"
 #include "Bullet.h"
+#include "BulletRunner.h"
 
 BulletCommand::BulletCommand(BulletMLParser *parser, Bullet *b)
 : BulletMLRunner(parser)
@@ -48,6 +49,8 @@ double BulletCommand::getRank()
 
 void BulletCommand::createSimpleBullet(double direction, double speed)
 {
+	if(manager == 0)
+		throw BulletMLError("createsimple: Command has no manager! Bad!");
 	int dir = static_cast<int>(direction);
 	int spd = static_cast<int>(speed);
 	manager->addSimpleBullet(bullet->pos.x, bullet->pos.y, spd, dir);
@@ -55,6 +58,8 @@ void BulletCommand::createSimpleBullet(double direction, double speed)
 
 void BulletCommand::createBullet(BulletMLState *state, double direction, double speed)
 {
+	if(manager == 0)
+		throw BulletMLError("createbullet: Command has no manager! Bad!");
 	int dir = static_cast<int>(direction);
 	int spd = static_cast<int>(speed);
 	manager->addActiveBullet(bullet->pos.x,
@@ -101,4 +106,9 @@ double BulletCommand::getBulletSpeedX()
 double BulletCommand::getBulletSpeedY()
 {
 	return static_cast<double>(bullet->vel.y);
+}
+
+void BulletCommand::setManager(BulletManager* newm)
+{
+	manager = newm;
 }

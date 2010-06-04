@@ -11,6 +11,7 @@ public:
 	~BulletManager();
 	std::list<Bullet*>& bullets() { return bullets_; }
 	BulletMLParser* parser() const { return parser_; }
+	void init(); //temporary
 
 	void move(float timeDelta);
 	void clean();
@@ -19,8 +20,11 @@ public:
 						 int speed, BulletMLState* state);
 	void removeBullet(Bullet* bullet);
 
+	bool finished() const { return finished_; }
+
 private:
 	Bullet* getNextBullet();
 	std::list<Bullet*> bullets_;
 	BulletMLParser* parser_;
+	bool finished_;
 };

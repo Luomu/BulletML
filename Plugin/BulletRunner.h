@@ -30,6 +30,9 @@ public:
 	virtual double getBulletSpeedX();
 	virtual double getBulletSpeedY();
 
+	BulletManager* getManager() { return manager; }
+	void setManager(BulletManager*);
+
 private:
 	Bullet* bullet;
 	BulletManager* manager;

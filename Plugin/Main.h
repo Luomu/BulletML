@@ -74,7 +74,7 @@ public:
 
 	long aRestart(LPVAL params);
 
-	//long eMyExpression(LPVAL params, ExpReturn& ret);
+	long eBulletCount(LPVAL params, ExpReturn& ret);
 
 	////////////////////////////////////////////////////
 	// Data members

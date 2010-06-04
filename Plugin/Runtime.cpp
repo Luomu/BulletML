@@ -4,6 +4,7 @@
 // Include StdAfx
 #include "StdAfx.h"
 #include <boost/foreach.hpp>
+#include "bulletml/bulletmlerror.h"
 
 //////////////////////////////////////////////////////////////////////////////////
 // Runtime functions
@@ -48,7 +49,18 @@ void ExtObject::OnCreate()
 	// Update bounding box
 	pRuntime->UpdateBoundingBox(this);
 
-	RaiseConstructError(CString("GSV Just Testing"));
+	try
+	{
+		manager.init();
+	}
+	catch(BulletMLError& berror)
+	{
+		RaiseConstructError(berror.what());
+	}
+	catch(...)
+	{
+		RaiseConstructError("Unknown error while initializing BulletML");
+	}
 }
 
 // Destructor: called when an instance of your object is destroyed.
@@ -64,8 +76,19 @@ BOOL ExtObject::OnFrame()
 	/*if (timeDelta > 0.5f)
 		timeDelta = 0.0f;*/
 	//runner.run(timeDelta);
-	manager.move(timeDelta);
-	manager.clean();
+	try
+	{
+		manager.move(timeDelta);
+		manager.clean();
+	}
+	catch(BulletMLError& err)
+	{
+		RaiseConstructError(err.what());
+	}
+	catch(...)
+	{
+		RaiseConstructError("Unknown error while running bullet script");
+	}
 
 	return 0;	// Do not call again
 }

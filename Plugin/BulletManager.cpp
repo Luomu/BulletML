@@ -4,11 +4,9 @@
 #include "BulletManager.h"
 
 BulletManager::BulletManager() :
-	parser_(0)
+	parser_(0),
+	finished_(false)
 {
-	std::string filename("test.xml");
-	parser_ = new BulletMLParserTinyXML(filename);
-	parser_->build();
 }
 
 BulletManager::~BulletManager()
@@ -16,6 +14,22 @@ BulletManager::~BulletManager()
 	BOOST_FOREACH(Bullet* bullet, bullets_)
 	{
 		delete bullet;
+	}
+	delete parser_;
+}
+
+void BulletManager::init()
+{
+	std::string filename("test.xml");
+	parser_ = new BulletMLParserTinyXML(filename);
+	parser_->build();
+
+	if(parser_ != 0)
+	{
+		Bullet* b = getNextBullet();
+		b->parser = parser_;
+		b->cmd = new BulletCommand(parser_, b);
+		b->cmd->setManager(this);
 	}
 }
 
@@ -37,6 +51,7 @@ void BulletManager::addActiveBullet(int x, int y, double rank, int dir,
 	Bullet* b = getNextBullet();
 	if(!b) return;
 	b->cmd = new BulletCommand(state, b);
+	b->cmd->setManager(this);
 	b->pos.x = x;
 	b->pos.y = y;
 	b->vel.x = b->vel.y = 0;
@@ -78,7 +93,7 @@ void BulletManager::move(float timeDelta)
 		b->cnt++;
 
 		b->lifetime += timeDelta * 1000;
-		if(b->lifetime > MAXLIFETIME) removeBullet(b);
+		if(b->lifetime > MAXLIFETIME/2) removeBullet(b);
 		//hit check, out of bounds check...
 	}
 }

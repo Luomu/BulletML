@@ -28,3 +28,8 @@ long ExtObject::eErrorString(LPVAL params, ExpReturn& ret)
 {
 	return ret.ReturnString(pRuntime, errorString);
 }
+
+long ExtObject::eBulletCount(LPVAL params, ExpReturn& ret)
+{
+	return ret = manager.bullets().size();
+}
