@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Bullet.h"
 
-Bullet::Bullet()
+Bullet::Bullet() :
+	color(RGB(255, 100, 0))
 {
 	pos.x = 0;
 	pos.y = 0;
@@ -12,7 +13,6 @@ Bullet::Bullet()
 	spc = NORMAL_BULLET;
 	type = 0;
 	cnt = 0;
-	color = 0;
 	hit = 0;
 	parser = 0;
 	vel.x = 0;
@@ -28,4 +28,11 @@ Bullet::~Bullet()
 		delete cmd;
 		cmd = 0;
 	}
+}
+
+bool Bullet::readyForDeletion()
+{
+	if(spc != NOT_EXIST) return false;
+	if(cmd != 0) return false;
+	return true;
 }

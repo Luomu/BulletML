@@ -19,7 +19,13 @@
 //OF_NOCOMMONDEBUG - Don't show 'Common' field (X/Y/W/H/Angle/Opacity) in debugger
 //OF_NODEBUG - Don't show at all in debugger
 //OF_UNDEFINEDEXPRESSIONS - Allow ReturnUndefinedExpression to be called
-#define IDE_FLAGS 	OF_ALLOWANGLES | OF_NOCOMMONDEBUG
+#define IDE_FLAGS 	OF_ALLOWANGLES | OF_NOCOMMONDEBUG | OF_MOVEMENTS | OF_EFFECTS
+#define COMMONACE_POSITION
+#define COMMONACE_VISIBILITY
+#define COMMONACE_OPACITY
+#define COMMONACE_FILTER
+#define COMMONACE_IDS
+#define COMMONACE_COUNT_DESTROY
 
 #include "..\Common\ExpReturn.hpp"
 #include "BulletManager.h"

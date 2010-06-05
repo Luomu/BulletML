@@ -5,13 +5,14 @@
 #define NOT_EXIST 0
 #define NORMAL_BULLET 1
 #define ACTIVE_BULLET 2
-#define REALLY_FINISHED 3
+#define TOP_BULLET 3;
 #define MAXLIFETIME 10000
 
 class Bullet {
 public:
 	Bullet();
 	~Bullet();
+	bool readyForDeletion();
 	Vec2 pos;
 	int spd;
 	double dir;
@@ -20,10 +21,11 @@ public:
 	int spc;
 	int type;
 	int shield;
-	int cnt, color;
+	int cnt;
 	int hit;
 	Vec2 vel; //acc
 	float lifetime;
+	cr::color color;
 
 	BulletMLParser* parser;
 };

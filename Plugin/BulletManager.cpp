@@ -27,6 +27,8 @@ void BulletManager::init()
 	if(parser_ != 0)
 	{
 		Bullet* b = getNextBullet();
+		b->spc = TOP_BULLET;
+		b->color = cr::color(RGB(0,255,100));
 		b->parser = parser_;
 		b->cmd = new BulletCommand(parser_, b);
 		b->cmd->setManager(this);
@@ -38,6 +40,8 @@ void BulletManager::restart()
 	if(parser_ != 0)
 	{
 		Bullet* b = getNextBullet();
+		b->spc = TOP_BULLET;
+		b->color = cr::color(RGB(0,255,100));
 		b->parser = parser_;
 		b->cmd = new BulletCommand(parser_, b);
 		b->cmd->setManager(this);
@@ -86,7 +90,7 @@ void BulletManager::move(float timeDelta)
 	BOOST_FOREACH(Bullet* b, bullets_)
 	{
 		assert(b != 0);
-		if(b->spc == NOT_EXIST) continue;
+		if(b->spc == NOT_EXIST && b->cmd == 0) continue;
 		if(b->cmd)
 		{
 			b->cmd->run();
@@ -96,7 +100,6 @@ void BulletManager::move(float timeDelta)
 				{
 					delete b->cmd;
 					b->cmd = 0;
-					b->spc = REALLY_FINISHED;
 				}
 				continue;
 			}
@@ -119,14 +122,13 @@ void BulletManager::removeBullet(Bullet* b)
 
 void BulletManager::clean()
 {
-	//BOOST_FOREACH(Bullet* bullet, bullets_)
-	for(std::list<Bullet*>::iterator i = bullets().begin();
-		i != bullets().end(); ++i)
+	std::list<Bullet*>::iterator it = bullets().begin();
+	for(; it != bullets().end(); )
 	{
-		assert(*i != 0);
-		if((*i)->spc != NOT_EXIST) continue;
-		if((*i)->cmd != 0) continue;
-		//bullets().erase(i);
-		delete *i;
+		if((*it)->readyForDeletion()) {
+			delete *(it);
+			it = bullets().erase(it);
+		} else
+			it++;
 	}
 }

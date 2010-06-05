@@ -14,14 +14,14 @@ void ExtObject::Draw()
 	CRunLayer* pLayer = pRuntime->GetLayer(pLayout, info.layer);
 	float totalZoom = pLayout->zoomX * pLayer->zoomXoffset;
 
-	cr::color col(RGB(255,100,0));
 	float oldptsize = renderer->GetPointSize();
 	renderer->SetPointSize(10.0f * totalZoom);
 	renderer->SetTexture(NULL);
 	BOOST_FOREACH(const Bullet* bullet, manager.bullets())
 	{
-		if(bullet->spc == NOT_EXIST) continue;
-		renderer->Point(cr::point(bullet->pos.x + info.x, bullet->pos.y + info.y), col);
+		//if(bullet->spc == NOT_EXIST) continue;
+		renderer->Point(cr::point(bullet->pos.x + info.x, bullet->pos.y + info.y),
+						bullet->color);
 	}
 	renderer->SetPointSize(oldptsize);
 
