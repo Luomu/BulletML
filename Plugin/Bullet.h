@@ -5,11 +5,13 @@
 #define NOT_EXIST 0
 #define NORMAL_BULLET 1
 #define ACTIVE_BULLET 2
+#define REALLY_FINISHED 3
 #define MAXLIFETIME 10000
 
 class Bullet {
 public:
 	Bullet();
+	~Bullet();
 	Vec2 pos;
 	int spd;
 	double dir;

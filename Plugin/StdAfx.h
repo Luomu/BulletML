@@ -23,6 +23,7 @@
 #include <windows.h>
 #include <atlstr.h>
 #include <atltypes.h>
+#include <cassert>
 
 // Custom headers
 #include <math.h>

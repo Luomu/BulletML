@@ -20,6 +20,7 @@ void ExtObject::Draw()
 	renderer->SetTexture(NULL);
 	BOOST_FOREACH(const Bullet* bullet, manager.bullets())
 	{
+		if(bullet->spc == NOT_EXIST) continue;
 		renderer->Point(cr::point(bullet->pos.x + info.x, bullet->pos.y + info.y), col);
 	}
 	renderer->SetPointSize(oldptsize);

@@ -12,6 +12,7 @@ public:
 	std::list<Bullet*>& bullets() { return bullets_; }
 	BulletMLParser* parser() const { return parser_; }
 	void init(); //temporary
+	void restart();
 
 	void move(float timeDelta);
 	void clean();

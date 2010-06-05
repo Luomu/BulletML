@@ -3,18 +3,21 @@
 #include "Bullet.h"
 #include "BulletRunner.h"
 
-BulletCommand::BulletCommand(BulletMLParser *parser, Bullet *b)
-: BulletMLRunner(parser)
+BulletCommand::BulletCommand(BulletMLParser *parser, Bullet *b) :
+	BulletMLRunner(parser),
+	manager(0)
 {
+	assert(bullet != 0);
 	bullet = b;
 	manager = 0;
 }
 
-BulletCommand::BulletCommand(BulletMLState *state, Bullet *b)
-: BulletMLRunner(state)
+BulletCommand::BulletCommand(BulletMLState *state, Bullet *b) :
+	BulletMLRunner(state),
+	manager(0)
 {
+	assert(bullet != 0);
 	bullet = b;
-	manager = 0;
 }
 
 BulletCommand::~BulletCommand() {}
@@ -49,8 +52,8 @@ double BulletCommand::getRank()
 
 void BulletCommand::createSimpleBullet(double direction, double speed)
 {
-	if(manager == 0)
-		throw BulletMLError("createsimple: Command has no manager! Bad!");
+	assert(manager != 0);
+	assert(bullet != 0);
 	int dir = static_cast<int>(direction);
 	int spd = static_cast<int>(speed);
 	manager->addSimpleBullet(bullet->pos.x, bullet->pos.y, spd, dir);
@@ -58,8 +61,8 @@ void BulletCommand::createSimpleBullet(double direction, double speed)
 
 void BulletCommand::createBullet(BulletMLState *state, double direction, double speed)
 {
-	if(manager == 0)
-		throw BulletMLError("createbullet: Command has no manager! Bad!");
+	assert(manager != 0);
+	assert(bullet != 0);
 	int dir = static_cast<int>(direction);
 	int spd = static_cast<int>(speed);
 	manager->addActiveBullet(bullet->pos.x,
@@ -75,7 +78,9 @@ int BulletCommand::getTurn()
 
 void BulletCommand::doVanish()
 {
-	manager->removeBullet(this->bullet);
+	assert(manager != 0);
+	assert(bullet != 0);
+	manager->removeBullet(bullet);
 }
 
 void BulletCommand::doChangeSpeed(double s)
@@ -110,5 +115,6 @@ double BulletCommand::getBulletSpeedY()
 
 void BulletCommand::setManager(BulletManager* newm)
 {
+	assert(newm != 0);
 	manager = newm;
 }

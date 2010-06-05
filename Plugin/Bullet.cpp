@@ -19,3 +19,13 @@ Bullet::Bullet()
 	vel.y = 0;
 	lifetime = 0;
 }
+
+Bullet::~Bullet()
+{
+	//assert(cmd == 0);
+	if(cmd != 0)
+	{
+		delete cmd;
+		cmd = 0;
+	}
+}

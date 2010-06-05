@@ -33,6 +33,17 @@ void BulletManager::init()
 	}
 }
 
+void BulletManager::restart()
+{
+	if(parser_ != 0)
+	{
+		Bullet* b = getNextBullet();
+		b->parser = parser_;
+		b->cmd = new BulletCommand(parser_, b);
+		b->cmd->setManager(this);
+	}
+}
+
 void BulletManager::addSimpleBullet(int x, int y, int speed, int direction)
 {
 	Bullet* b = getNextBullet();
@@ -74,6 +85,7 @@ void BulletManager::move(float timeDelta)
 	int dy = 0;
 	BOOST_FOREACH(Bullet* b, bullets_)
 	{
+		assert(b != 0);
 		if(b->spc == NOT_EXIST) continue;
 		if(b->cmd)
 		{
@@ -84,6 +96,7 @@ void BulletManager::move(float timeDelta)
 				{
 					delete b->cmd;
 					b->cmd = 0;
+					b->spc = REALLY_FINISHED;
 				}
 				continue;
 			}
@@ -100,15 +113,20 @@ void BulletManager::move(float timeDelta)
 
 void BulletManager::removeBullet(Bullet* b)
 {
+	assert(b != 0);
 	b->spc = NOT_EXIST;
 }
 
 void BulletManager::clean()
 {
-	BOOST_FOREACH(Bullet* bullet, bullets_)
+	//BOOST_FOREACH(Bullet* bullet, bullets_)
+	for(std::list<Bullet*>::iterator i = bullets().begin();
+		i != bullets().end(); ++i)
 	{
-		if(bullet->spc != NOT_EXIST) continue;
-		if(bullet->cmd != 0) continue;
-		delete bullet;
+		assert(*i != 0);
+		if((*i)->spc != NOT_EXIST) continue;
+		if((*i)->cmd != 0) continue;
+		//bullets().erase(i);
+		delete *i;
 	}
 }
