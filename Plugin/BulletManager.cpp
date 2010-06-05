@@ -5,7 +5,8 @@
 
 BulletManager::BulletManager() :
 	parser_(0),
-	finished_(false)
+	finished_(false),
+	angle_(0)
 {
 }
 
@@ -13,8 +14,10 @@ BulletManager::~BulletManager()
 {
 	BOOST_FOREACH(Bullet* bullet, bullets_)
 	{
+		assert(bullet != 0);
 		delete bullet;
 	}
+	bullets_.clear();
 	delete parser_;
 }
 
@@ -56,7 +59,7 @@ void BulletManager::addSimpleBullet(int x, int y, int speed, int direction)
 	b->pos.x = x + pos().x;
 	b->pos.y = y + pos().y;
 	b->spd = speed;
-	b->dir = direction;
+	b->dir = angle_ + 90 + direction;
 	b->spc = NORMAL_BULLET;
 }
 
@@ -85,10 +88,10 @@ Bullet* BulletManager::getNextBullet()
 
 void BulletManager::move(const float timeDelta)
 {
-	bbox_.left = 5000;
-	bbox_.top = 5000;
-	bbox_.right = 0;
-	bbox_.bottom = 0;
+	bbox_.left = 0;
+	bbox_.top = 0;
+	bbox_.right = 800;
+	bbox_.bottom = 600;
 	int dx = 0;
 	int dy = 0;
 	BOOST_FOREACH(Bullet* b, bullets_)
@@ -109,7 +112,7 @@ void BulletManager::move(const float timeDelta)
 			}
 		}
 		b->pos.x += dx + sin(RADIANS(b->dir)) * b->spd * timeDelta;
-		b->pos.y += -dy + cos(RADIANS(b->dir)) * b->spd * timeDelta;
+		b->pos.y -= -dy + cos(RADIANS(b->dir)) * b->spd * timeDelta;
 		b->cnt++;
 
 		b->lifetime += timeDelta * 1000;
@@ -118,7 +121,7 @@ void BulletManager::move(const float timeDelta)
 		//hit check, out of bounds check...
 
 		//update bbox
-		if(b->spc == NOT_EXIST) continue;
+		/*if(b->spc == NOT_EXIST) continue;
 		if(b->spc == TOP_BULLET) continue;
 		if(b->pos.x < bbox_.left)
 			bbox_.left = b->pos.x;
@@ -127,7 +130,7 @@ void BulletManager::move(const float timeDelta)
 		if(b->pos.y < bbox_.top)
 			bbox_.top = b->pos.y;
 		if(b->pos.x > bbox_.bottom)
-			bbox_.bottom = b->pos.y;
+			bbox_.bottom = b->pos.y;*/
 	}
 }
 

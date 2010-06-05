@@ -30,7 +30,13 @@ void ExtObject::Draw()
 	info.box = manager.boundingBox();
 #ifdef _DEBUG
 	// Draw a simple rectangle
-	renderer->Box(info.box, cr::color(50, 0, 0, 0), info.angle);
+	//renderer->Box(cr::rect(info.x, info.y, info.x + info.w, info.y + info.h), cr::color(50, 0, 0, 0), info.angle);
+	float startx = info.x + info.HotSpotX;
+	float starty = info.y + info.HotSpotY;
+	float endx = startx + cos(RADIANS(info.angle)) * 100;
+	float endy = starty + sin(RADIANS(info.angle)) * 100;
+	renderer->Line(cr::point(startx, starty),
+				   cr::point(endx, endy), cr::color(RGB(100,100,0)));
 #endif
 
 }

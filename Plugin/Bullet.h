@@ -6,7 +6,7 @@
 #define NORMAL_BULLET 1
 #define ACTIVE_BULLET 2
 #define TOP_BULLET 3
-#define MAXLIFETIME 10000
+#define MAXLIFETIME 20000
 
 class Bullet {
 public:
