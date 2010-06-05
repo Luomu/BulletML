@@ -23,7 +23,7 @@
 
 BEGIN_PROPERTY_TABLE();
 
-	//PROPERTY_VALUE(myValue, "Test value", "This is a test PROPERTY_VALUE.");
+	PROPERTY_VALUE(maxLifeTime, "Timeout", "Timeout in milliseconds before destroying bullet (without unfinished actions).");
 
 END_PROPERTY_TABLE  ();
 
@@ -33,7 +33,8 @@ END_PROPERTY_TABLE  ();
 //////////////////////////////////////////////////////////////////////////////////
 
 // Constructor
-EditExt::EditExt(VEditTime* pVEditTime, editInfo* pEInfo)
+EditExt::EditExt(VEditTime* pVEditTime, editInfo* pEInfo) :
+	maxLifeTime(8000)
 {
 	// Store the edittime and einfo pointers
 	pEditTime = pVEditTime;

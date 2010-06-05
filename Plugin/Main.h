@@ -84,6 +84,7 @@ public:
 
 	////////////////////////////////////////////////////
 	// Data members
+	int maxLifeTime;
 
 	// Use when private variables (OF_PRIVATEVARIABLES) are enabled.
 	float timeDelta;
@@ -125,7 +126,7 @@ public:
 	// Your edittime extension data goes here
 	//int iTexture;		// DX texture
 
-	//int myValue;
+	int maxLifeTime; //v2
 };
 
 // Internal stuff include

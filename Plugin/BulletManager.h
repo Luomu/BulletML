@@ -30,6 +30,9 @@ public:
 	void setAngle(const double);
 	RECTF& boundingBox() { return bbox_; }
 
+	int maxLifeTime() const { return maxLifeTime_; }
+	void setMaxLifeTime(const int);
+
 private:
 	Bullet* getNextBullet();
 	std::list<Bullet*> bullets_;
@@ -38,4 +41,5 @@ private:
 	Vec2 pos_;
 	double angle_;
 	RECTF bbox_;
+	int maxLifeTime_;
 };

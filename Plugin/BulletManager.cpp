@@ -6,7 +6,8 @@
 BulletManager::BulletManager() :
 	parser_(0),
 	finished_(false),
-	angle_(0)
+	angle_(0),
+	maxLifeTime_(20000)
 {
 }
 
@@ -117,7 +118,7 @@ void BulletManager::move(const float timeDelta)
 
 		b->lifetime += timeDelta * 1000;
 
-		if(b->lifetime > MAXLIFETIME/2) removeBullet(b);
+		if(b->lifetime > maxLifeTime_ && b->cmd == 0) removeBullet(b);
 		//hit check, out of bounds check...
 
 		//update bbox
@@ -162,4 +163,10 @@ void BulletManager::setPos(const int x, const int y)
 {
 	pos_.x = x;
 	pos_.y = y;
+}
+
+void BulletManager::setMaxLifeTime(const int newl)
+{
+	if(newl > 0)
+		maxLifeTime_ = newl;
 }

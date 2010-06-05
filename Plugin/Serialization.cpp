@@ -29,18 +29,15 @@ void ExtObject::Serialize(bin& ar)
 // You never need to check 'Version' while saving.
 void EditExt::Serialize(bin& ar)
 {
-	int Version = 1;
+	int Version = 2;
 	SerializeVersion(ar, Version);
 
 	if (ar.loading) {
-
-		//ar >> myValue;
-
+		if(Version > 1)
+			ar >> maxLifeTime;
 	}
 	else {
-		
-		//ar << myValue;
-
+		ar << maxLifeTime;
 	}
 }
 

@@ -35,6 +35,7 @@ void ExtObject::OnCreate()
 	int Version = 0;
 	ar >> Version;
 	//ar >> myValue;
+	ar >> maxLifeTime;
 
 	// Finished reading data
 	ar.detach();
@@ -52,6 +53,7 @@ void ExtObject::OnCreate()
 	try
 	{
 		manager.init();
+		manager.setMaxLifeTime(maxLifeTime);
 	}
 	catch(BulletMLError& berror)
 	{
