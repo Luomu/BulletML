@@ -5,7 +5,7 @@
 #define NOT_EXIST 0
 #define NORMAL_BULLET 1
 #define ACTIVE_BULLET 2
-#define TOP_BULLET 3;
+#define TOP_BULLET 3
 #define MAXLIFETIME 10000
 
 class Bullet {

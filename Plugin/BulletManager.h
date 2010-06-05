@@ -28,6 +28,7 @@ public:
 	void setPos(const int x, const int y);
 	double angle() const { return angle_; }
 	void setAngle(const double);
+	RECTF& boundingBox() { return bbox_; }
 
 private:
 	Bullet* getNextBullet();
@@ -36,4 +37,5 @@ private:
 	bool finished_;
 	Vec2 pos_;
 	double angle_;
+	RECTF bbox_;
 };
