@@ -13,7 +13,7 @@ public:
 	Bullet();
 	~Bullet();
 	bool readyForDeletion();
-	Vec2 pos;
+	Vec2f pos;
 	int spd;
 	double dir;
 	BulletCommand* cmd;
@@ -23,7 +23,7 @@ public:
 	int shield;
 	int cnt;
 	int hit;
-	Vec2 vel; //acc
+	Vec2f vel; //acc
 	float lifetime;
 	cr::color color;
 

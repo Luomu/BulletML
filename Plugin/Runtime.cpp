@@ -73,8 +73,8 @@ ExtObject::~ExtObject()
 BOOL ExtObject::OnFrame()
 {
 	timeDelta = pRuntime->GetTimeDelta();
-	/*if (timeDelta > 0.5f)
-		timeDelta = 0.0f;*/
+	if (timeDelta > 0.5f)
+		timeDelta = 0.0f;
 	manager.setPos(info.x, info.y);
 	manager.setAngle(info.angle);
 
