@@ -19,11 +19,18 @@ void ExtObject::Draw()
 	renderer->SetTexture(NULL);
 	BOOST_FOREACH(const Bullet* bullet, manager.bullets())
 	{
-		//if(bullet->spc == NOT_EXIST) continue;
-		renderer->Point(cr::point(bullet->pos.x + info.x, bullet->pos.y + info.y),
+#ifndef _DEBUG
+		if(bullet->spc == NOT_EXIST) continue;
+#endif
+		renderer->Point(cr::point(bullet->pos.x, bullet->pos.y),
 						bullet->color);
 	}
 	renderer->SetPointSize(oldptsize);
+
+#ifdef _DEBUG
+	// Draw a simple rectangle
+	renderer->Box(info.box, cr::color(50, 0, 0, 0), info.angle);
+#endif
 
 }
 

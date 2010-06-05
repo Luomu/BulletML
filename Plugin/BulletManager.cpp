@@ -53,8 +53,8 @@ void BulletManager::addSimpleBullet(int x, int y, int speed, int direction)
 	Bullet* b = getNextBullet();
 	if(!b) return;
 	b->cmd = 0;
-	b->pos.x = x;
-	b->pos.y = y;
+	b->pos.x = x + pos().x;
+	b->pos.y = y + pos().y;
 	b->spd = speed;
 	b->dir = direction;
 	b->spc = NORMAL_BULLET;
@@ -67,8 +67,8 @@ void BulletManager::addActiveBullet(int x, int y, double rank, int dir,
 	if(!b) return;
 	b->cmd = new BulletCommand(state, b);
 	b->cmd->setManager(this);
-	b->pos.x = x;
-	b->pos.y = y;
+	b->pos.x = x + pos().x;
+	b->pos.y = y + pos().y;
 	b->vel.x = b->vel.y = 0;
 	b->dir = dir;
 	b->spd = speed;
@@ -83,7 +83,7 @@ Bullet* BulletManager::getNextBullet()
 	return newb;
 }
 
-void BulletManager::move(float timeDelta)
+void BulletManager::move(const float timeDelta)
 {
 	int dx = 0;
 	int dy = 0;
@@ -131,4 +131,15 @@ void BulletManager::clean()
 		} else
 			it++;
 	}
+}
+
+void BulletManager::setAngle(const double newa)
+{
+	angle_ = newa;
+}
+
+void BulletManager::setPos(const int x, const int y)
+{
+	pos_.x = x;
+	pos_.y = y;
 }
