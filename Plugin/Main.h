@@ -20,6 +20,7 @@
 //OF_NODEBUG - Don't show at all in debugger
 //OF_UNDEFINEDEXPRESSIONS - Allow ReturnUndefinedExpression to be called
 #define IDE_FLAGS 	OF_ALLOWANGLES | OF_NOCOMMONDEBUG | OF_MOVEMENTS | OF_EFFECTS
+#define COMMONACE_ANGLE
 #define COMMONACE_POSITION
 #define COMMONACE_VISIBILITY
 #define COMMONACE_OPACITY

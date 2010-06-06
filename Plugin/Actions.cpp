@@ -24,6 +24,10 @@ long ExtObject::aLoad(LPVAL params)
 		errorstring += berror.what();
 		RaiseConstructError(errorstring);
 	}
+	catch(std::exception& stex)
+	{
+		RaiseConstructError(stex.what());
+	}
 	catch(...)
 	{
 		RaiseConstructError("Cannot load or parse " + params[0].GetString() + ". Unknown error.");

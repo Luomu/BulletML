@@ -19,6 +19,11 @@ BulletManager::~BulletManager()
 		delete bullet;
 	}
 	bullets_.clear();
+	BOOST_FOREACH(BulletMLParser* trashed, parserTrash_)
+	{
+		delete trashed;
+	}
+	parserTrash_.clear();
 	delete parser_;
 }
 
@@ -33,19 +38,20 @@ void BulletManager::init()
 		Bullet* b = getNextBullet();
 		b->spc = TOP_BULLET;
 		b->color = cr::color(RGB(0,255,100));
-		b->parser = parser_;
-		b->cmd = new BulletCommand(parser_, b);
+		b->parser = parser();
+		b->cmd = new BulletCommand(parser(), b);
 		b->cmd->setManager(this);
 	}
 }
 
 void BulletManager::load(const std::string& filename)
 {
-	if(parser_ == 0)
+	if(parser_ != 0)
 	{
-		parser_ = new BulletMLParserTinyXML(filename);
-		parser_->build();
+		parserTrash_.push_back(parser_);
 	}
+	parser_ = new BulletMLParserTinyXML(filename);
+	parser_->build();
 }
 
 void BulletManager::restart()
@@ -55,8 +61,8 @@ void BulletManager::restart()
 		Bullet* b = getNextBullet();
 		b->spc = TOP_BULLET;
 		b->color = cr::color(RGB(0,255,100));
-		b->parser = parser_;
-		b->cmd = new BulletCommand(parser_, b);
+		b->parser = parser();
+		b->cmd = new BulletCommand(parser(), b);
 		b->cmd->setManager(this);
 	}
 }

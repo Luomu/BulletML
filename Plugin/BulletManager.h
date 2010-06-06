@@ -43,4 +43,7 @@ private:
 	double angle_;
 	RECTF bbox_;
 	int maxLifeTime_;
+	//TODO: Store parsers in a map by name
+	//Add checkbox to enable/disable caching
+	std::list<BulletMLParser*> parserTrash_; //temporary, I hope, should use smartptrs instead
 };
