@@ -48,10 +48,16 @@ void ExtObject::Draw()
 	//renderer->Box(cr::rect(info.x, info.y, info.x + info.w, info.y + info.h), cr::color(50, 0, 0, 0), info.angle);
 	float startx = info.x + info.HotSpotX;
 	float starty = info.y + info.HotSpotY;
-	float endx = startx + cos(RADIANS(info.angle)) * 100;
-	float endy = starty + sin(RADIANS(info.angle)) * 100;
+	float endx = startx + cos(RADIANS(info.angle)) * 50;
+	float endy = starty + sin(RADIANS(info.angle)) * 50;
+	cr::color col(RGB(255,255,0));
 	renderer->Line(cr::point(startx, starty),
-				   cr::point(endx, endy), cr::color(RGB(100,100,0)));
+				   cr::point(endx, endy), col);
+
+	endx = startx + cos(RADIANS(info.angle - 90)) * 20;
+	endy = starty + sin(RADIANS(info.angle - 90)) * 20;
+	renderer->Line(cr::point(startx, starty),
+				   cr::point(endx, endy), col);
 #endif
 
 }
