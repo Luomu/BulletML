@@ -58,8 +58,7 @@ void ExtObject::OnCreate()
 
 	try
 	{
-		manager.setMaxLifeTime(parameters.maxLifeTime);
-		//manager.init();
+		manager.setParameters(parameters);
 	}
 	catch(BulletMLError& berror)
 	{

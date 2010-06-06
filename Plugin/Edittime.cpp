@@ -27,6 +27,10 @@ BEGIN_PROPERTY_TABLE();
 	PROPERTY_BOOL(parameters.destroyOutsideScreen, "Destroy outside screen", "Destroy bullets if they get outside the screen.");
 	PROPERTY_BUTTON("Edit", "Texture", "Edit", BtnEditTexture());
 
+	PROPERTY_FLOAT(parameters.defaultSpeed, "Default speed", "For bullets without specified speed, in pixels per second.");
+	PROPERTY_FLOAT(parameters.speedMultiplier, "Speed multiplier", "Use this to adjust speed values");
+	PROPERTY_FLOAT(parameters.timeMultiplier, "Time multiplier", "Use this to adjust time (wait) values");
+
 END_PROPERTY_TABLE  ();
 
 

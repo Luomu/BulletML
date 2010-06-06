@@ -3,7 +3,10 @@
 
 Parameters::Parameters() :
 	maxLifeTime(20000),
-	destroyOutsideScreen(true)
+	destroyOutsideScreen(true),
+	speedMultiplier(1.f),
+	timeMultiplier(1.f),
+	defaultSpeed(250.f)
 { }
 
 void Parameters::Serialize(bin &ar)
@@ -15,10 +18,16 @@ void Parameters::Serialize(bin &ar)
 	{
 		ar >> maxLifeTime;
 		ar >> destroyOutsideScreen;
+		ar >> speedMultiplier;
+		ar >> timeMultiplier;
+		ar >> defaultSpeed;
 	}
 	else
 	{
 		ar << maxLifeTime;
 		ar << destroyOutsideScreen;
+		ar << speedMultiplier;
+		ar << timeMultiplier;
+		ar << defaultSpeed;
 	}
 } 

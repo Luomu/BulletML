@@ -6,13 +6,13 @@
 BulletManager::BulletManager() :
 	parser_(0),
 	finished_(false),
-	angle_(0),
-	maxLifeTime_(20000)
+	angle_(0)
 {
 	screen_.left, screen_.top = 0;
 	screen_.right = 800;
 	screen_.bottom = 600;
 	parameters_.destroyOutsideScreen = true;
+	parameters_.maxLifeTime = 10000;
 }
 
 BulletManager::~BulletManager()
@@ -143,10 +143,10 @@ void BulletManager::move(const float timeDelta)
 
 		b->lifetime += timeDelta * 1000;
 
-		if(b->lifetime > maxLifeTime_ && b->cmd == 0) removeBullet(b);
+		if(b->lifetime > parameters_.maxLifeTime && b->cmd == 0) removeBullet(b);
 
 		//out of bounds check
-		if(parameters_.destroyOutsideScreen && b->spc != TOP_BULLET)
+		if(parameters_.destroyOutsideScreen && b->cmd == 0)
 		{
 			if(!PointInsideBox(b->pos.x, b->pos.y, screen()))
 				removeBullet(b);
@@ -196,12 +196,6 @@ void BulletManager::setPos(const int x, const int y)
 	pos_.y = y;
 }
 
-void BulletManager::setMaxLifeTime(const int newl)
-{
-	if(newl > 0)
-		maxLifeTime_ = newl;
-}
-
 bool BulletManager::queryCollision(RECTF &box)
 {
 	bool coll = false;
@@ -215,4 +209,9 @@ bool BulletManager::queryCollision(RECTF &box)
 		}
 	}
 	return coll;
+}
+
+void BulletManager::setParameters(const Parameters& newp)
+{
+	parameters_ = newp;
 }

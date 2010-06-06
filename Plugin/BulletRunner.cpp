@@ -42,7 +42,7 @@ double BulletCommand::getBulletSpeed()
 
 double BulletCommand::getDefaultSpeed()
 {
-	return 250;
+	return manager.defaultSpeed();
 }
 
 double BulletCommand::getRank()

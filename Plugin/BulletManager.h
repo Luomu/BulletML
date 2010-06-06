@@ -33,10 +33,14 @@ public:
 	void setAngle(const double);
 	RECTF& boundingBox() { return bbox_; }
 
-	int maxLifeTime() const { return maxLifeTime_; }
-	void setMaxLifeTime(const int);
+	int maxLifeTime() const { return parameters_.maxLifeTime; }
 
 	RECTF& screen() { return screen_; }
+
+	Parameters& parameters() { return parameters_; }
+	void setParameters(const Parameters&);
+
+	float defaultSpeed() const { return parameters_.defaultSpeed;
 
 private:
 	Bullet* getNextBullet();
@@ -46,7 +50,6 @@ private:
 	Vec2 pos_;
 	double angle_;
 	RECTF bbox_;
-	int maxLifeTime_;
 	//TODO: Store parsers in a map by name
 	//Add checkbox to enable/disable caching
 	std::list<BulletMLParser*> parserTrash_; //temporary, I hope, should use smartptrs instead
