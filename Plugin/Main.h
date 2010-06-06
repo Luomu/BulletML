@@ -79,6 +79,7 @@ public:
 #include "..\Common\CommonAceDecl.hpp"
 
 	long cFinished(LPVAL params);
+	long cOnCollision(LPVAL params);
 
 	long aRestart(LPVAL params);
 	long aLoad(LPVAL params);

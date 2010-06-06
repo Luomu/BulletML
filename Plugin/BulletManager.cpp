@@ -185,3 +185,24 @@ void BulletManager::setMaxLifeTime(const int newl)
 	if(newl > 0)
 		maxLifeTime_ = newl;
 }
+
+// Point/box overlaps.
+inline bool PointInsideBox(float x, float y, const RECTF& box)
+{
+	return (x >= box.left && x < box.right && y >= box.top && y < box.bottom);
+}
+
+bool BulletManager::queryCollision(RECTF &box)
+{
+	bool coll = false;
+	BOOST_FOREACH(Bullet* b, bullets())
+	{
+		if(b->spc == NOT_EXIST) continue;
+		if(PointInsideBox(b->pos.x, b->pos.y, box))
+		{
+			coll = true;
+			removeBullet(b);
+		}
+	}
+	return coll;
+}

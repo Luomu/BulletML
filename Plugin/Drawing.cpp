@@ -34,7 +34,7 @@ void ExtObject::Draw()
 #endif
 		//cr::color col =bullet->color;
 		cr::color col(RGB(255,255,255));
-		col = info.pInfo->filter;
+		//col = info.pInfo->filter;
 		renderer->Point(cr::point(bullet->pos.x, bullet->pos.y),
 						col);
 	}

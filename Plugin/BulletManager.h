@@ -15,6 +15,7 @@ public:
 	void init(); //temporary
 	void restart();
 	void load(const std::string& filename);
+	bool queryCollision(RECTF& box);
 
 	void move(const float timeDelta);
 	void clean();
