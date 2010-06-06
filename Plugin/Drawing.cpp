@@ -27,7 +27,7 @@ void ExtObject::Draw()
 	}
 	renderer->SetPointSize(oldptsize);
 
-	info.box = manager.boundingBox();
+	//info.box = manager.boundingBox();
 #ifdef _DEBUG
 	// Draw a simple rectangle
 	//renderer->Box(cr::rect(info.x, info.y, info.x + info.w, info.y + info.h), cr::color(50, 0, 0, 0), info.angle);

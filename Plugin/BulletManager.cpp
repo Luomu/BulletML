@@ -39,6 +39,15 @@ void BulletManager::init()
 	}
 }
 
+void BulletManager::load(const std::string& filename)
+{
+	if(parser_ == 0)
+	{
+		parser_ = new BulletMLParserTinyXML(filename);
+		parser_->build();
+	}
+}
+
 void BulletManager::restart()
 {
 	if(parser_ != 0)

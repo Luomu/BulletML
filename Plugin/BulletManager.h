@@ -14,6 +14,7 @@ public:
 	BulletMLParser* parser() const { return parser_; }
 	void init(); //temporary
 	void restart();
+	void load(const std::string& filename);
 
 	void move(const float timeDelta);
 	void clean();

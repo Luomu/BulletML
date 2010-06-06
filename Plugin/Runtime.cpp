@@ -51,8 +51,8 @@ void ExtObject::OnCreate()
 
 	try
 	{
-		manager.init();
 		manager.setMaxLifeTime(parameters.maxLifeTime);
+		//manager.init();
 	}
 	catch(BulletMLError& berror)
 	{
@@ -76,7 +76,7 @@ BOOL ExtObject::OnFrame()
 	timeDelta = pRuntime->GetTimeDelta();
 	/*if (timeDelta > 0.5f)
 		timeDelta = 0.0f;*/
-	manager.setPos(info.x, info.y);
+	manager.setPos(info.x + info.HotSpotX, info.y + info.HotSpotY);
 	manager.setAngle(info.angle);
 
 	try

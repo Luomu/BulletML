@@ -35,6 +35,8 @@ void DefineACES(MicroAceTime* at)
 	//ADDPARAM(PARAM_VALUE, "Example parameter", "Here is an example parameter.");
 	//ADDACT("My action", "My category", "Example action (%0)", &ExtObject::aMyAction, "MyAction", 0);
 	ADDACT("Restart", "BulletML", "Restart", &ExtObject::aRestart, "Restart", 0);
+	ADDPARAM(PARAM_STRING, "File name", "BulletML file to load.");
+	ADDACT("Load", "BulletML", "Load file %0", &ExtObject::aLoad, "Load", 0);
 
 	//Room saving
 	/////////////////////////////
