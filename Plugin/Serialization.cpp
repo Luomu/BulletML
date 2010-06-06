@@ -35,8 +35,13 @@ void EditExt::Serialize(bin& ar)
 	parameters.Serialize(ar);
 
 	if (ar.loading) {
+		pEditTime->SerializeImage(imgHandle, ar);
 	}
 	else {
+		if(imgHandle == -1)
+			ar << imgHandle;
+		else
+			pEditTime->SerializeImage(imgHandle, ar);
 	}
 }
 

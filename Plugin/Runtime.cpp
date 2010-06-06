@@ -30,15 +30,22 @@ void ExtObject::OnCreate()
 	bin ar;
 	ar.attach(info.editObject->eData, info.editObject->eSize);
 
+	ImageHandleInfo* imgHandle = NULL;
+	th = NULL;
+
 	// Read the data.  Same format as you exported in EditExt::Serialize.
 	// Your runtime loader must be able to load all versions!
 	int Version = 0;
 	ar >> Version;
 	parameters.Serialize(ar);
+	imgHandle = pRuntime->LoadSerializedImageHandle(ar);
+	th = renderer->CreateTextureFromHandle(imgHandle);
 
 	// Finished reading data
 	ar.detach();
 
+	info.curTexture = 0;
+	info.imgHandle = 0;
 	// Set default dimensions
 	info.x = info.editObject->eX;
 	info.y = info.editObject->eY;

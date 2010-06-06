@@ -92,6 +92,7 @@ public:
 	// Use when private variables (OF_PRIVATEVARIABLES) are enabled.
 	float timeDelta;
 	BulletManager manager;
+	TextureHandle th;
 
 	// Error reporting
 	bool unreportedError;
@@ -127,9 +128,9 @@ public:
 
 	///////////////////////////
 	// Your edittime extension data goes here
-	//int iTexture;		// DX texture
-
 	Parameters parameters;
+	int imgHandle;
+	void BtnEditTexture();
 };
 
 // Internal stuff include

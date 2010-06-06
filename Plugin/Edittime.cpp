@@ -25,6 +25,7 @@ BEGIN_PROPERTY_TABLE();
 
 	PROPERTY_VALUE(parameters.maxLifeTime, "Timeout", "Timeout in milliseconds before destroying bullet (without unfinished actions).");
 	PROPERTY_BOOL(parameters.destroyOutsideScreen, "Destroy outside screen", "Destroy bullets if they get outside the screen.");
+	PROPERTY_BUTTON("Edit", "Texture", "Edit", BtnEditTexture());
 
 END_PROPERTY_TABLE  ();
 
@@ -40,6 +41,7 @@ EditExt::EditExt(VEditTime* pVEditTime, editInfo* pEInfo) :
 	// Store the edittime and einfo pointers
 	pEditTime = pVEditTime;
 	pInfo = pEInfo;
+	imgHandle = -1;
 }
 
 // Destructor: when your object is deleted or the application closed:
@@ -47,6 +49,13 @@ EditExt::EditExt(VEditTime* pVEditTime, editInfo* pEInfo) :
 EditExt::~EditExt()
 {
 
+}
+
+void EditExt::BtnEditTexture()
+{
+	if(imgHandle == -1)
+		imgHandle = pEditTime->AddImage(32, 32);
+	pEditTime->EditImage(imgHandle);
 }
 
 // Initialization:  when the frame editor is opened.  Create textures, fonts,
@@ -69,6 +78,7 @@ void EditExt::OnPut()
 	pInfo->objectHeight = 64;
 	pInfo->originX = 0.5f;
 	pInfo->originY = 0.5f;
+	imgHandle = pEditTime->AddImage(32, 32);
 }
 
 
