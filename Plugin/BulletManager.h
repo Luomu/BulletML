@@ -1,6 +1,7 @@
 #pragma once
 #include "Bullet.h"
 #include "Vec2.h"
+#include "Parameters.h"
 
 class BulletMLParser;
 
@@ -35,6 +36,8 @@ public:
 	int maxLifeTime() const { return maxLifeTime_; }
 	void setMaxLifeTime(const int);
 
+	RECTF& screen() { return screen_; }
+
 private:
 	Bullet* getNextBullet();
 	std::list<Bullet*> bullets_;
@@ -47,4 +50,7 @@ private:
 	//TODO: Store parsers in a map by name
 	//Add checkbox to enable/disable caching
 	std::list<BulletMLParser*> parserTrash_; //temporary, I hope, should use smartptrs instead
+
+	Parameters parameters_;
+	RECTF screen_;
 };

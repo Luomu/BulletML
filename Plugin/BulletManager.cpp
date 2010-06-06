@@ -9,6 +9,10 @@ BulletManager::BulletManager() :
 	angle_(0),
 	maxLifeTime_(20000)
 {
+	screen_.left, screen_.top = 0;
+	screen_.right = 800;
+	screen_.bottom = 600;
+	parameters_.destroyOutsideScreen = true;
 }
 
 BulletManager::~BulletManager()
@@ -102,6 +106,12 @@ Bullet* BulletManager::getNextBullet()
 	return newb;
 }
 
+// Point/box overlaps.
+inline bool PointInsideBox(float x, float y, const RECTF& box)
+{
+	return (x >= box.left && x < box.right && y >= box.top && y < box.bottom);
+}
+
 void BulletManager::move(const float timeDelta)
 {
 	bbox_.left = 0;
@@ -134,7 +144,13 @@ void BulletManager::move(const float timeDelta)
 		b->lifetime += timeDelta * 1000;
 
 		if(b->lifetime > maxLifeTime_ && b->cmd == 0) removeBullet(b);
-		//hit check, out of bounds check...
+
+		//out of bounds check
+		if(parameters_.destroyOutsideScreen && b->spc != TOP_BULLET)
+		{
+			if(!PointInsideBox(b->pos.x, b->pos.y, screen()))
+				removeBullet(b);
+		}
 
 		//update bbox
 		/*if(b->spc == NOT_EXIST) continue;
@@ -184,12 +200,6 @@ void BulletManager::setMaxLifeTime(const int newl)
 {
 	if(newl > 0)
 		maxLifeTime_ = newl;
-}
-
-// Point/box overlaps.
-inline bool PointInsideBox(float x, float y, const RECTF& box)
-{
-	return (x >= box.left && x < box.right && y >= box.top && y < box.bottom);
 }
 
 bool BulletManager::queryCollision(RECTF &box)
