@@ -28,7 +28,7 @@ void DefineACES(MicroAceTime* at)
 	ADDCND("Finished", "BulletML", "%o Finished", &ExtObject::cFinished, "Finished", 0);
 	ADDCND("On error occurred", "BulletML", "%o On error occurred", &ExtObject::cErrorOccurred, "ErrorOccurred", 0);
 	ADDPARAM(PARAM_OBJECT, "Object name", "Name of the object");
-	ADDCND("On collision", "BulletML", "%o A bullet collides with %0", &ExtObject::cOnCollision, "OnCollision", 0);
+	ADDCND("On collision", "BulletML", "%o A bullet collides with %0", &ExtObject::cOnCollision, "OnCollision", SOL_MODIFIER);
 
 	/////////////////////////////
 	// Actions

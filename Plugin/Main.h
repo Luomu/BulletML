@@ -95,6 +95,9 @@ public:
 	BulletManager manager;
 	TextureHandle th;
 
+	// For triggering "On collision" - remembering previous state
+	map<void*, set<CRunObject*> > collisionMemory;
+
 	// Error reporting
 	bool unreportedError;
 	CString errorString;
