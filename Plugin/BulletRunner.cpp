@@ -42,7 +42,7 @@ double BulletCommand::getBulletSpeed()
 
 double BulletCommand::getDefaultSpeed()
 {
-	return manager.defaultSpeed();
+	return manager->defaultSpeed();
 }
 
 double BulletCommand::getRank()
@@ -55,7 +55,7 @@ void BulletCommand::createSimpleBullet(double direction, double speed)
 	assert(manager != 0);
 	assert(bullet != 0);
 	int dir = static_cast<int>(direction);
-	int spd = static_cast<int>(speed);
+	float spd = static_cast<float>(speed);
 	manager->addSimpleBullet(bullet->pos.x, bullet->pos.y, spd, dir);
 }
 
@@ -64,7 +64,7 @@ void BulletCommand::createBullet(BulletMLState *state, double direction, double 
 	assert(manager != 0);
 	assert(bullet != 0);
 	int dir = static_cast<int>(direction);
-	int spd = static_cast<int>(speed);
+	float spd = static_cast<float>(speed);
 	manager->addActiveBullet(bullet->pos.x,
 							 bullet->pos.y,
 							 bullet->rank,
@@ -73,7 +73,7 @@ void BulletCommand::createBullet(BulletMLState *state, double direction, double 
 
 int BulletCommand::getTurn()
 {
-	return static_cast<int>(GetTickCount());
+	return static_cast<int>(GetTickCount()/manager->parameters().timeMultiplier);
 }
 
 void BulletCommand::doVanish()
@@ -85,7 +85,7 @@ void BulletCommand::doVanish()
 
 void BulletCommand::doChangeSpeed(double s)
 {
-	bullet->spd = static_cast<int>(s);
+	bullet->spd = static_cast<float>(s);
 }
 
 void BulletCommand::doChangeDirection(double d)

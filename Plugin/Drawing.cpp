@@ -32,8 +32,7 @@ void ExtObject::Draw()
 #ifndef _DEBUG
 		if(bullet->spc == NOT_EXIST) continue;
 #endif
-		//cr::color col =bullet->color;
-		cr::color col(RGB(255,255,255));
+		cr::color col = bullet->color;
 		//col = info.pInfo->filter;
 		renderer->Point(cr::point(bullet->pos.x, bullet->pos.y),
 						col);

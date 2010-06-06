@@ -20,9 +20,9 @@ public:
 
 	void move(const float timeDelta);
 	void clean();
-	void addSimpleBullet(int x, int y, int speed, int dir);
+	void addSimpleBullet(int x, int y, float speed, int dir);
 	void addActiveBullet(int x, int y, double rank, int dir,
-						 int speed, BulletMLState* state);
+						 float speed, BulletMLState* state);
 	void removeBullet(Bullet* bullet);
 
 	bool finished() const { return finished_; }
@@ -40,7 +40,7 @@ public:
 	Parameters& parameters() { return parameters_; }
 	void setParameters(const Parameters&);
 
-	float defaultSpeed() const { return parameters_.defaultSpeed;
+	float defaultSpeed() const { return parameters_.defaultSpeed; }
 
 private:
 	Bullet* getNextBullet();

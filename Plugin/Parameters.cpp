@@ -2,7 +2,7 @@
 #include "Parameters.h"
 
 Parameters::Parameters() :
-	maxLifeTime(20000),
+	maxLifeTime(10000),
 	destroyOutsideScreen(true),
 	speedMultiplier(1.f),
 	timeMultiplier(1.f),

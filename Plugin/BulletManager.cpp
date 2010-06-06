@@ -71,20 +71,20 @@ void BulletManager::restart()
 	}
 }
 
-void BulletManager::addSimpleBullet(int x, int y, int speed, int direction)
+void BulletManager::addSimpleBullet(int x, int y, float speed, int direction)
 {
 	Bullet* b = getNextBullet();
 	if(!b) return;
 	b->cmd = 0;
 	b->pos.x = x + pos().x;
 	b->pos.y = y + pos().y;
-	b->spd = speed;
+	b->spd = speed * parameters().speedMultiplier;
 	b->dir = angle_ + 90 + direction;
 	b->spc = NORMAL_BULLET;
 }
 
 void BulletManager::addActiveBullet(int x, int y, double rank, int dir,
-									int speed, BulletMLState* state)
+									float speed, BulletMLState* state)
 {
 	Bullet* b = getNextBullet();
 	if(!b) return;
@@ -94,9 +94,10 @@ void BulletManager::addActiveBullet(int x, int y, double rank, int dir,
 	b->pos.y = y + pos().y;
 	b->vel.x = b->vel.y = 0;
 	b->dir = dir;
-	b->spd = speed;
+	b->spd = speed * parameters().speedMultiplier;
 	b->type = 0;
 	b->spc = ACTIVE_BULLET;
+	b->color = cr::color(RGB(255,0,0));
 }
 
 Bullet* BulletManager::getNextBullet()

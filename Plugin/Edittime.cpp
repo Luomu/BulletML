@@ -58,7 +58,7 @@ EditExt::~EditExt()
 void EditExt::BtnEditTexture()
 {
 	if(imgHandle == -1)
-		imgHandle = pEditTime->AddImage(32, 32);
+		imgHandle = pEditTime->AddImage(16, 16);
 	pEditTime->EditImage(imgHandle);
 }
 
@@ -82,7 +82,7 @@ void EditExt::OnPut()
 	pInfo->objectHeight = 64;
 	pInfo->originX = 0.5f;
 	pInfo->originY = 0.5f;
-	imgHandle = pEditTime->AddImage(32, 32);
+	imgHandle = pEditTime->AddImage(16, 16);
 }
 
 

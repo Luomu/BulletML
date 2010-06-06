@@ -2,7 +2,7 @@
 #include "Bullet.h"
 
 Bullet::Bullet() :
-	color(RGB(255, 100, 0))
+	color(RGB(255, 255, 255))
 {
 	pos.x = 0;
 	pos.y = 0;
