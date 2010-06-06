@@ -29,15 +29,14 @@ void ExtObject::Serialize(bin& ar)
 // You never need to check 'Version' while saving.
 void EditExt::Serialize(bin& ar)
 {
-	int Version = 2;
+	int Version = 1;
 	SerializeVersion(ar, Version);
 
+	parameters.Serialize(ar);
+
 	if (ar.loading) {
-		if(Version > 1)
-			ar >> maxLifeTime;
 	}
 	else {
-		ar << maxLifeTime;
 	}
 }
 

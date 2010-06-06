@@ -29,6 +29,7 @@
 
 #include "..\Common\ExpReturn.hpp"
 #include "BulletManager.h"
+#include "Parameters.h"
 
 #define OBJECTRECT CRect(editObject->objectX, editObject->objectY, editObject->objectX + editObject->objectWidth, editObject->objectY + editObject->objectHeight)
 
@@ -84,7 +85,7 @@ public:
 
 	////////////////////////////////////////////////////
 	// Data members
-	int maxLifeTime;
+	Parameters parameters;
 
 	// Use when private variables (OF_PRIVATEVARIABLES) are enabled.
 	float timeDelta;
@@ -126,7 +127,7 @@ public:
 	// Your edittime extension data goes here
 	//int iTexture;		// DX texture
 
-	int maxLifeTime; //v2
+	Parameters parameters;
 };
 
 // Internal stuff include

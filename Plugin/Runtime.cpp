@@ -34,8 +34,7 @@ void ExtObject::OnCreate()
 	// Your runtime loader must be able to load all versions!
 	int Version = 0;
 	ar >> Version;
-	//ar >> myValue;
-	ar >> maxLifeTime;
+	parameters.Serialize(ar);
 
 	// Finished reading data
 	ar.detach();
@@ -53,7 +52,7 @@ void ExtObject::OnCreate()
 	try
 	{
 		manager.init();
-		manager.setMaxLifeTime(maxLifeTime);
+		manager.setMaxLifeTime(parameters.maxLifeTime);
 	}
 	catch(BulletMLError& berror)
 	{

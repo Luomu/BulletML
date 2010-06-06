@@ -23,7 +23,8 @@
 
 BEGIN_PROPERTY_TABLE();
 
-	PROPERTY_VALUE(maxLifeTime, "Timeout", "Timeout in milliseconds before destroying bullet (without unfinished actions).");
+	PROPERTY_VALUE(parameters.maxLifeTime, "Timeout", "Timeout in milliseconds before destroying bullet (without unfinished actions).");
+	PROPERTY_BOOL(parameters.destroyOutsideScreen, "Destroy outside screen", "Destroy bullets if they get outside the screen.");
 
 END_PROPERTY_TABLE  ();
 
@@ -34,7 +35,7 @@ END_PROPERTY_TABLE  ();
 
 // Constructor
 EditExt::EditExt(VEditTime* pVEditTime, editInfo* pEInfo) :
-	maxLifeTime(8000)
+	parameters()
 {
 	// Store the edittime and einfo pointers
 	pEditTime = pVEditTime;
