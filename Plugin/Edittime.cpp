@@ -25,11 +25,15 @@ BEGIN_PROPERTY_TABLE();
 
 	PROPERTY_VALUE(parameters.maxLifeTime, "Timeout", "Timeout in milliseconds before destroying bullet (without unfinished actions).");
 	PROPERTY_BOOL(parameters.destroyOutsideScreen, "Destroy outside screen", "Destroy bullets if they get outside the screen.");
-	PROPERTY_BUTTON("Edit", "Texture", "Edit", BtnEditTexture());
 
 	PROPERTY_FLOAT(parameters.defaultSpeed, "Default speed", "For bullets without specified speed, in pixels per second.");
 	PROPERTY_FLOAT(parameters.speedMultiplier, "Speed multiplier", "Use this to adjust speed values");
 	PROPERTY_FLOAT(parameters.timeMultiplier, "Time multiplier", "Use this to adjust time (wait) values");
+
+PROPERTY_NEW_CATEGORY("Rendering", "Visual settings");
+	PROPERTY_BOOL(parameters.useTexture, "Use texture", "Use texture for rendering");
+	PROPERTY_BUTTON("Edit", "Texture", "Edit", BtnEditTexture());
+	PROPERTY_VALUE(parameters.bulletSize, "Bullet size", "Bullet size in pixels");
 
 END_PROPERTY_TABLE  ();
 

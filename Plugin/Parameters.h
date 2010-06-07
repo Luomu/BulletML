@@ -3,11 +3,14 @@
 class Parameters
 {
 public:
+	Parameters();
+	void Serialize(bin& ar);
+
 	int maxLifeTime;
 	float speedMultiplier;
 	float timeMultiplier;
 	float defaultSpeed;
 	bool destroyOutsideScreen;
-	Parameters();
-	void Serialize(bin& ar);
+	bool useTexture;
+	int bulletSize;
 };

@@ -6,7 +6,9 @@ Parameters::Parameters() :
 	destroyOutsideScreen(true),
 	speedMultiplier(1.f),
 	timeMultiplier(1.f),
-	defaultSpeed(250.f)
+	defaultSpeed(250.f),
+	useTexture(false),
+	bulletSize(16)
 { }
 
 void Parameters::Serialize(bin &ar)
@@ -21,6 +23,8 @@ void Parameters::Serialize(bin &ar)
 		ar >> speedMultiplier;
 		ar >> timeMultiplier;
 		ar >> defaultSpeed;
+		ar >> useTexture;
+		ar >> bulletSize;
 	}
 	else
 	{
@@ -29,5 +33,7 @@ void Parameters::Serialize(bin &ar)
 		ar << speedMultiplier;
 		ar << timeMultiplier;
 		ar << defaultSpeed;
+		ar << useTexture;
+		ar << bulletSize;
 	}
 } 
