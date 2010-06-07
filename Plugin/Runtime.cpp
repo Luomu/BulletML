@@ -51,7 +51,9 @@ void ExtObject::OnCreate()
 	info.y = info.editObject->eY;
 	info.w = info.editObject->eWidth;
 	info.h = info.editObject->eHeight;
-	info.angle = 0.0f;
+	info.angle = info.editObject->eAngle;
+
+	info.pInfo->filter = info.editObject->eColor;
 
 	// Update bounding box
 	pRuntime->UpdateBoundingBox(this);

@@ -8,7 +8,7 @@ Parameters::Parameters() :
 	timeMultiplier(1.f),
 	defaultSpeed(250.f),
 	useTexture(false),
-	bulletSize(16)
+	bulletSize(10.f)
 { }
 
 void Parameters::Serialize(bin &ar)

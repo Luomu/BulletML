@@ -12,5 +12,5 @@ public:
 	float defaultSpeed;
 	bool destroyOutsideScreen;
 	bool useTexture;
-	int bulletSize;
+	float bulletSize;
 };

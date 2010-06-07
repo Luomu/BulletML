@@ -13,7 +13,6 @@ public:
 	~BulletManager();
 	std::list<Bullet*>& bullets() { return bullets_; }
 	BulletMLParser* parser() const { return parser_; }
-	void init(); //temporary
 	void restart();
 	void load(const std::string& filename);
 	bool queryCollision(RECTF& box);

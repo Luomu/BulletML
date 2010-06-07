@@ -33,7 +33,7 @@ BEGIN_PROPERTY_TABLE();
 PROPERTY_NEW_CATEGORY("Rendering", "Visual settings");
 	PROPERTY_BOOL(parameters.useTexture, "Use texture", "Use texture for rendering");
 	PROPERTY_BUTTON("Edit", "Texture", "Edit", BtnEditTexture());
-	PROPERTY_VALUE(parameters.bulletSize, "Bullet size", "Bullet size in pixels");
+	PROPERTY_FLOAT(parameters.bulletSize, "Bullet size", "Bullet size in pixels");
 
 END_PROPERTY_TABLE  ();
 

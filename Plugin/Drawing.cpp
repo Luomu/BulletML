@@ -11,15 +11,14 @@
 // leave it blank if your plugin doesn't draw anything.  This is not called when OF_NODRAW is set.
 void ExtObject::Draw()
 {
-	bool useTexture = true;
 	CRunLayer* pLayer = pRuntime->GetLayer(pLayout, info.layer);
 	float totalZoom = pLayout->zoomX * pLayer->zoomXoffset;
 
 	float oldptsize = renderer->GetPointSize();
-	renderer->SetPointSize(10.0f * totalZoom);
+	renderer->SetPointSize(parameters.bulletSize * totalZoom);
 
 	cr::renderstate_value oldPointSpriteState = renderer->GetRenderState(cr::rs_pointsprite_enabled);
-	if(useTexture)
+	if(parameters.useTexture)
 	{
 		renderer->SetRenderState(cr::rs_pointsprite_enabled, cr::rsv_enabled);
 		renderer->SetTexture(th);
@@ -33,11 +32,11 @@ void ExtObject::Draw()
 		if(bullet->spc == NOT_EXIST) continue;
 #endif
 		cr::color col = bullet->color;
-		//col = info.pInfo->filter;
+		col *= info.pInfo->filter;
 		renderer->Point(cr::point(bullet->pos.x, bullet->pos.y),
 						col);
 	}
-	if(useTexture)
+	if(parameters.useTexture)
 		renderer->SetRenderState(cr::rs_pointsprite_enabled, oldPointSpriteState);
 	renderer->SetPointSize(oldptsize);
 
