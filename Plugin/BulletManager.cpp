@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include <boost/foreach.hpp>
 #include "bulletml/bulletmlparser-tinyxml.h"
+#include "bulletml/bulletmlerror.h"
 #include "BulletManager.h"
 
 BulletManager::BulletManager() :
 	parser_(0),
+	paused_(false),
 	finished_(false),
 	angle_(0)
 {
@@ -37,20 +39,28 @@ void BulletManager::load(const std::string& filename)
 	{
 		parserTrash_.push_back(parser_);
 	}
+	parser_ = 0;
 	parser_ = new BulletMLParserTinyXML(filename);
-	parser_->build();
+	if(parser() != 0)
+		parser_->build();
 }
 
 void BulletManager::restart()
 {
 	if(parser_ != 0)
 	{
+		setPaused(false);
 		Bullet* b = getNextBullet();
 		b->spc = TOP_BULLET;
+		b->pos = this->pos();
 		b->color = cr::color(RGB(255,0,255));
 		b->parser = parser();
 		b->cmd = new BulletCommand(parser(), b);
 		b->cmd->setManager(this);
+	}
+	else
+	{
+		throw BulletMLError("No parser available");
 	}
 }
 
@@ -59,8 +69,8 @@ void BulletManager::addSimpleBullet(int x, int y, float speed, int direction)
 	Bullet* b = getNextBullet();
 	if(!b) return;
 	b->cmd = 0;
-	b->pos.x = x + pos().x;
-	b->pos.y = y + pos().y;
+	b->pos.x = x;// + pos().x;
+	b->pos.y = y;// + pos().y;
 	b->spd = speed * parameters().speedMultiplier;
 	b->dir = angle_ + 90 + direction;
 	b->spc = NORMAL_BULLET;
@@ -73,8 +83,8 @@ void BulletManager::addActiveBullet(int x, int y, double rank, int dir,
 	if(!b) return;
 	b->cmd = new BulletCommand(state, b);
 	b->cmd->setManager(this);
-	b->pos.x = x + pos().x;
-	b->pos.y = y + pos().y;
+	b->pos.x = x;// + pos().x;
+	b->pos.y = y;// + pos().y;
 	b->vel.x = b->vel.y = 0;
 	b->dir = dir;
 	b->spd = speed * parameters().speedMultiplier;
@@ -110,7 +120,8 @@ void BulletManager::move(const float timeDelta)
 		if(b->spc == NOT_EXIST && b->cmd == 0) continue;
 		if(b->cmd)
 		{
-			b->cmd->run();
+			if(!paused())
+				b->cmd->run();
 			if(b->spc == NOT_EXIST)
 			{
 				if(b->cmd)
@@ -121,8 +132,8 @@ void BulletManager::move(const float timeDelta)
 				continue;
 			}
 		}
-		b->pos.x += sin(RADIANS(b->dir)) * b->spd * timeDelta + b->vel.x * timeDelta;
-		b->pos.y -= cos(RADIANS(b->dir)) * b->spd * timeDelta - b->vel.y * timeDelta;
+		b->pos.x += (sin(RADIANS(b->dir)) * b->spd * timeDelta + b->vel.x * timeDelta);
+		b->pos.y -= (cos(RADIANS(b->dir)) * b->spd * timeDelta - b->vel.y * timeDelta);
 		b->cnt++;
 
 		b->lifetime += timeDelta * 1000;

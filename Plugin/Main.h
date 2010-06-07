@@ -83,6 +83,8 @@ public:
 
 	long aRestart(LPVAL params);
 	long aLoad(LPVAL params);
+	long aStop(LPVAL params);
+	long aClear(LPVAL params);
 
 	long eBulletCount(LPVAL params, ExpReturn& ret);
 

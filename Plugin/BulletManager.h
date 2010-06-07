@@ -26,7 +26,7 @@ public:
 
 	bool finished() const { return finished_; }
 
-	Vec2& pos() { return pos_; }
+	Vec2f& pos() { return pos_; }
 	void setPos(const int x, const int y);
 	double angle() const { return angle_; }
 	void setAngle(const double);
@@ -41,12 +41,16 @@ public:
 
 	float defaultSpeed() const { return parameters_.defaultSpeed; }
 
+	bool paused() const { return paused_; }
+	void setPaused(const bool newp) { paused_ = newp; }
+
 private:
 	Bullet* getNextBullet();
 	std::list<Bullet*> bullets_;
 	BulletMLParser* parser_;
 	bool finished_;
-	Vec2 pos_;
+	bool paused_;
+	Vec2f pos_;
 	double angle_;
 	RECTF bbox_;
 	//TODO: Store parsers in a map by name

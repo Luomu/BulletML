@@ -11,6 +11,19 @@ long ExtObject::aRestart(LPVAL params)
 	return 0;
 }
 
+long ExtObject::aStop(LPVAL params)
+{
+	manager.setPaused(true);
+	return 0;
+}
+
+long ExtObject::aClear(LPVAL params)
+{
+	RaiseConstructError("Not implemented");
+	//manager.clean();
+	return 0;
+}
+
 long ExtObject::aLoad(LPVAL params)
 {
 	CT2CA filename(params[0].GetString());

@@ -36,9 +36,11 @@ void DefineACES(MicroAceTime* at)
 	// ADDCND(List name, Category, Display string, Function address, Script name, Flags)
 	//ADDPARAM(PARAM_VALUE, "Example parameter", "Here is an example parameter.");
 	//ADDACT("My action", "My category", "Example action (%0)", &ExtObject::aMyAction, "MyAction", 0);
-	ADDACT("Restart", "BulletML", "Restart", &ExtObject::aRestart, "Restart", 0);
 	ADDPARAM(PARAM_STRING, "File name", "BulletML file to load.");
 	ADDACT("Load", "BulletML", "Load file %0", &ExtObject::aLoad, "Load", 0);
+	ADDACT("Restart", "BulletML", "Restart", &ExtObject::aRestart, "Restart", 0);
+	ADDACT("Stop", "BulletML", "Stop", &ExtObject::aStop, "Stop", 0);
+	ADDACT("Clear", "BulletML", "Remove all bullets", &ExtObject::aClear, "Clear", 0);
 
 	//Room saving
 	/////////////////////////////
