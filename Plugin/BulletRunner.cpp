@@ -95,12 +95,12 @@ void BulletCommand::doChangeDirection(double d)
 
 void BulletCommand::doAccelX(double ax)
 {
-	bullet->vel.x = static_cast<int>(ax);
+	bullet->vel.x = static_cast<float>(ax);
 }
 
 void BulletCommand::doAccelY(double ay)
 {
-	bullet->vel.y = static_cast<int>(ay);
+	bullet->vel.y = static_cast<float>(ay);
 }
 
 double BulletCommand::getBulletSpeedX()

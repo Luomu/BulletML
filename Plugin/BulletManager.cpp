@@ -138,8 +138,8 @@ void BulletManager::move(const float timeDelta)
 				continue;
 			}
 		}
-		b->pos.x += dx + sin(RADIANS(b->dir)) * b->spd * timeDelta;
-		b->pos.y -= -dy + cos(RADIANS(b->dir)) * b->spd * timeDelta;
+		b->pos.x += sin(RADIANS(b->dir)) * b->spd * timeDelta + b->vel.x * timeDelta;
+		b->pos.y -= cos(RADIANS(b->dir)) * b->spd * timeDelta - b->vel.y * timeDelta;
 		b->cnt++;
 
 		b->lifetime += timeDelta * 1000;
