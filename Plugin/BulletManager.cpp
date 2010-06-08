@@ -13,8 +13,6 @@ BulletManager::BulletManager() :
 	screen_.left, screen_.top = 0;
 	screen_.right = 800;
 	screen_.bottom = 600;
-	parameters_.destroyOutsideScreen = true;
-	parameters_.maxLifeTime = 10000;
 }
 
 BulletManager::~BulletManager()
@@ -86,10 +84,8 @@ void BulletManager::addActiveBullet(int x, int y, double rank, int dir,
 	b->cmd->setManager(this);
 	b->pos.x = x;
 	b->pos.y = y;
-	b->vel.x = b->vel.y = 0;
 	b->dir = dir;
 	b->spd = speed * parameters().speedMultiplier;
-	b->type = 0;
 	b->spc = ACTIVE_BULLET;
 	b->color = cr::color(RGB(255,0,0));
 }
@@ -119,6 +115,11 @@ void BulletManager::move(const float timeDelta)
 	{
 		assert(b != 0);
 		if(b->spc == NOT_EXIST && b->cmd == 0) continue;
+		if(b->spc == TOP_BULLET)
+		{
+			b->pos.x = pos().x;
+			b->pos.y = pos().y;
+		}
 		if(b->cmd)
 		{
 			if(!paused())

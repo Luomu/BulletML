@@ -30,7 +30,7 @@ void ExtObject::Draw()
 	BOOST_FOREACH(const Bullet* bullet, manager.bullets())
 	{
 #ifndef _DEBUG
-		if(bullet->spc == NOT_EXIST) continue;
+		if(bullet->spc == NOT_EXIST || bullet->spc == TOP_BULLET) continue;
 #endif
 		cr::color col = bullet->color;
 		col *= info.pInfo->filter;
