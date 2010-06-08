@@ -34,6 +34,7 @@ PROPERTY_NEW_CATEGORY("Rendering", "Visual settings");
 	PROPERTY_BOOL(parameters.useTexture, "Use texture", "Use texture for rendering");
 	PROPERTY_BUTTON("Edit", "Texture", "Edit", BtnEditTexture());
 	PROPERTY_FLOAT(parameters.bulletSize, "Bullet size", "Bullet size in pixels");
+	PROPERTY_BOOL(parameters.allowRotations, "Allow rotation", "Allow visual rotation of bullets. Nonrotated bullets might give better performance.");
 
 END_PROPERTY_TABLE  ();
 

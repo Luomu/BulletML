@@ -8,7 +8,8 @@ Parameters::Parameters() :
 	timeMultiplier(1.f),
 	defaultSpeed(250.f),
 	useTexture(false),
-	bulletSize(10.f)
+	bulletSize(10.f),
+	allowRotations(false)
 { }
 
 void Parameters::Serialize(bin &ar)
@@ -25,6 +26,7 @@ void Parameters::Serialize(bin &ar)
 		ar >> defaultSpeed;
 		ar >> useTexture;
 		ar >> bulletSize;
+		ar >> allowRotations;
 	}
 	else
 	{
@@ -35,5 +37,6 @@ void Parameters::Serialize(bin &ar)
 		ar << defaultSpeed;
 		ar << useTexture;
 		ar << bulletSize;
+		ar << allowRotations;
 	}
 } 

@@ -81,6 +81,11 @@ ExtObject::~ExtObject()
 // Return 1 (do not call again) or 0 (continue calling)
 BOOL ExtObject::OnFrame()
 {
+	info.box.left = info.x;
+	info.box.top = info.y;
+	info.box.right = info.x + 1;
+	info.box.bottom = info.y + 1;
+
 	timeDelta = pRuntime->GetTimeDelta();
 	/*if (timeDelta > 0.5f)
 		timeDelta = 0.0f;*/

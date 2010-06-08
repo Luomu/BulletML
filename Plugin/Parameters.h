@@ -13,4 +13,5 @@ public:
 	bool destroyOutsideScreen;
 	bool useTexture;
 	float bulletSize;
+	bool allowRotations;
 };

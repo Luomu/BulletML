@@ -139,7 +139,7 @@ void BulletManager::move(const float timeDelta)
 
 		b->lifetime += timeDelta * 1000;
 
-		if(b->lifetime > parameters_.maxLifeTime && b->cmd == 0) removeBullet(b);
+		if(b->lifetime > parameters_.maxLifeTime) removeBullet(b);
 
 		//out of bounds check
 		if(parameters_.destroyOutsideScreen && b->cmd == 0)

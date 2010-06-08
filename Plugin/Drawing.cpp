@@ -13,9 +13,9 @@ void ExtObject::Draw()
 {
 	CRunLayer* pLayer = pRuntime->GetLayer(pLayout, info.layer);
 	float totalZoom = pLayout->zoomX * pLayer->zoomXoffset;
-
 	float oldptsize = renderer->GetPointSize();
 	float pointsize = parameters.bulletSize * totalZoom;
+	cr::point hotspot(pointsize/2, pointsize/2);
 	renderer->SetPointSize(pointsize);
 
 	cr::renderstate_value oldPointSpriteState = renderer->GetRenderState(cr::rs_pointsprite_enabled);
@@ -34,21 +34,19 @@ void ExtObject::Draw()
 #endif
 		cr::color col = bullet->color;
 		col *= info.pInfo->filter;
-		if(bullet->dir == 0)
+		if(parameters.allowRotations && bullet->dir != 0)
 		{
-			renderer->Point(cr::point(bullet->pos.x, bullet->pos.y), col);
+			renderer->Quad_xywh(bullet->pos.x, bullet->pos.y, pointsize, pointsize, bullet->dir, hotspot, col);
 		}
 		else
 		{
-			cr::point hotspot(pointsize/2, pointsize/2);
-			renderer->Quad_xywh(bullet->pos.x, bullet->pos.y, pointsize, pointsize, bullet->dir, hotspot, col);
+			renderer->Point(cr::point(bullet->pos.x, bullet->pos.y), col);
 		}
 	}
 	if(parameters.useTexture)
 		renderer->SetRenderState(cr::rs_pointsprite_enabled, oldPointSpriteState);
 	renderer->SetPointSize(oldptsize);
 
-	//info.box = manager.boundingBox();
 #ifdef _DEBUG
 	// Draw a simple rectangle
 	//renderer->Box(cr::rect(info.x, info.y, info.x + info.w, info.y + info.h), cr::color(50, 0, 0, 0), info.angle);
