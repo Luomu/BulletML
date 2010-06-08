@@ -53,6 +53,7 @@ void BulletManager::restart()
 		Bullet* b = getNextBullet();
 		b->spc = TOP_BULLET;
 		b->pos = this->pos();
+		b->dir = static_cast<int>(angle_);
 		b->color = cr::color(RGB(255,0,255));
 		b->parser = parser();
 		b->cmd = new BulletCommand(parser(), b);
@@ -69,10 +70,10 @@ void BulletManager::addSimpleBullet(int x, int y, float speed, int direction)
 	Bullet* b = getNextBullet();
 	if(!b) return;
 	b->cmd = 0;
-	b->pos.x = x;// + pos().x;
-	b->pos.y = y;// + pos().y;
+	b->pos.x = x;
+	b->pos.y = y;
 	b->spd = speed * parameters().speedMultiplier;
-	b->dir = angle_ + 90 + direction;
+	b->dir = 90 + direction;
 	b->spc = NORMAL_BULLET;
 }
 
@@ -83,8 +84,8 @@ void BulletManager::addActiveBullet(int x, int y, double rank, int dir,
 	if(!b) return;
 	b->cmd = new BulletCommand(state, b);
 	b->cmd->setManager(this);
-	b->pos.x = x;// + pos().x;
-	b->pos.y = y;// + pos().y;
+	b->pos.x = x;
+	b->pos.y = y;
 	b->vel.x = b->vel.y = 0;
 	b->dir = dir;
 	b->spd = speed * parameters().speedMultiplier;
@@ -132,8 +133,8 @@ void BulletManager::move(const float timeDelta)
 				continue;
 			}
 		}
-		b->pos.x += (sin(RADIANS(b->dir)) * b->spd * timeDelta + b->vel.x * timeDelta);
-		b->pos.y -= (cos(RADIANS(b->dir)) * b->spd * timeDelta - b->vel.y * timeDelta);
+		b->pos.x += timeDelta * sin(RADIANS(b->dir)) * (b->spd + b->vel.x);
+		b->pos.y -= timeDelta * cos(RADIANS(b->dir)) * (b->spd - b->vel.y);
 		b->cnt++;
 
 		b->lifetime += timeDelta * 1000;
