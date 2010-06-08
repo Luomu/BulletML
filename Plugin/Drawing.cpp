@@ -15,7 +15,8 @@ void ExtObject::Draw()
 	float totalZoom = pLayout->zoomX * pLayer->zoomXoffset;
 
 	float oldptsize = renderer->GetPointSize();
-	renderer->SetPointSize(parameters.bulletSize * totalZoom);
+	float pointsize = parameters.bulletSize * totalZoom;
+	renderer->SetPointSize(pointsize);
 
 	cr::renderstate_value oldPointSpriteState = renderer->GetRenderState(cr::rs_pointsprite_enabled);
 	if(parameters.useTexture)
@@ -33,8 +34,15 @@ void ExtObject::Draw()
 #endif
 		cr::color col = bullet->color;
 		col *= info.pInfo->filter;
-		renderer->Point(cr::point(bullet->pos.x, bullet->pos.y),
-						col);
+		if(bullet->dir == 0)
+		{
+			renderer->Point(cr::point(bullet->pos.x, bullet->pos.y), col);
+		}
+		else
+		{
+			cr::point hotspot(pointsize/2, pointsize/2);
+			renderer->Quad_xywh(bullet->pos.x, bullet->pos.y, pointsize, pointsize, bullet->dir, hotspot, col);
+		}
 	}
 	if(parameters.useTexture)
 		renderer->SetRenderState(cr::rs_pointsprite_enabled, oldPointSpriteState);

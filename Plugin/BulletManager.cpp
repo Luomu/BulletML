@@ -73,7 +73,7 @@ void BulletManager::addSimpleBullet(int x, int y, float speed, int direction)
 	b->pos.x = x;
 	b->pos.y = y;
 	b->spd = speed * parameters().speedMultiplier;
-	b->dir = 90 + direction;
+	b->dir = direction;
 	b->spc = NORMAL_BULLET;
 }
 
