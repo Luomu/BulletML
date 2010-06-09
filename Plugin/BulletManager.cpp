@@ -61,6 +61,7 @@ void BulletManager::restart()
 	{
 		throw BulletMLError("No parser available");
 	}
+	setFinished(false);
 }
 
 void BulletManager::addSimpleBullet(int x, int y, float speed, int direction)
@@ -124,6 +125,12 @@ void BulletManager::move(const float timeDelta)
 		{
 			if(!paused())
 				b->cmd->run();
+			if(b->cmd->isEnd())
+			{
+				if(b->spc == TOP_BULLET)
+					setFinished(true);
+				removeBullet(b);
+			}
 			if(b->spc == NOT_EXIST)
 			{
 				if(b->cmd)
@@ -140,7 +147,7 @@ void BulletManager::move(const float timeDelta)
 
 		b->lifetime += timeDelta * 1000;
 
-		if(b->lifetime > parameters_.maxLifeTime) removeBullet(b);
+		if(b->lifetime > parameters_.maxLifeTime && b->cmd == 0) removeBullet(b);
 
 		//out of bounds check
 		if(parameters_.destroyOutsideScreen && b->cmd == 0)
@@ -148,18 +155,6 @@ void BulletManager::move(const float timeDelta)
 			if(!PointInsideBox(b->pos.x, b->pos.y, screen()))
 				removeBullet(b);
 		}
-
-		//update bbox
-		/*if(b->spc == NOT_EXIST) continue;
-		if(b->spc == TOP_BULLET) continue;
-		if(b->pos.x < bbox_.left)
-			bbox_.left = b->pos.x;
-		if(b->pos.x > bbox_.right)
-			bbox_.right = b->pos.x;
-		if(b->pos.y < bbox_.top)
-			bbox_.top = b->pos.y;
-		if(b->pos.x > bbox_.bottom)
-			bbox_.bottom = b->pos.y;*/
 	}
 }
 
@@ -211,4 +206,9 @@ bool BulletManager::queryCollision(RECTF &box)
 void BulletManager::setParameters(const Parameters& newp)
 {
 	parameters_ = newp;
+}
+
+void BulletManager::setFinished(const bool newstate)
+{
+	finished_ = true;
 }

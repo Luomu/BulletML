@@ -25,6 +25,7 @@ public:
 	void removeBullet(Bullet* bullet);
 
 	bool finished() const { return finished_; }
+	void setFinished(const bool);
 
 	Vec2f& pos() { return pos_; }
 	void setPos(const int x, const int y);
