@@ -6,7 +6,19 @@
 //////////////////////////////////////////////////////////////////////////////////
 long ExtObject::cFinished(LPVAL params)
 {
-	return manager.finished();
+	if(unreportedFinish == true && manager.finished())
+	{
+		unreportedFinish = false;
+		return 1;
+	}
+	return 0;
+}
+
+long ExtObject::cIsRunning(LPVAL params)
+{
+	if(manager.finished())
+		return false;
+	return true;
 }
 
 long ExtObject::cErrorOccurred(LPVAL params)

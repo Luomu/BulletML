@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 long ExtObject::aRestart(LPVAL params)
 {
+	unreportedFinish = true;
 	manager.restart();
 	return 0;
 }

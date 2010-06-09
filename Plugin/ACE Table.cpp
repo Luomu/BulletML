@@ -25,10 +25,11 @@ void DefineACES(MicroAceTime* at)
 	// Format:
 	// ADDCND(List name, Category, Display string, Function address, Script name, Flags)
 	//ADDCND("My condition", "My category", "%o My condition", &ExtObject::cMyCondition, "MyCondition", 0);
-	ADDCND("Finished", "BulletML", "%o Finished", &ExtObject::cFinished, "Finished", 0);
+	ADDCND("On finished", "BulletML", "%o On finished", &ExtObject::cFinished, "Finished", 0);
 	ADDCND("On error occurred", "BulletML", "%o On error occurred", &ExtObject::cErrorOccurred, "ErrorOccurred", 0);
 	ADDPARAM(PARAM_OBJECT, "Object name", "Name of the object");
 	ADDCND("On collision", "BulletML", "%o A bullet collides with %0", &ExtObject::cOnCollision, "OnCollision", SOL_MODIFIER);
+	ADDCND("Is running", "BulletML", "%o Script is running", &ExtObject::cIsRunning, "IsRunning", 0);
 
 	/////////////////////////////
 	// Actions

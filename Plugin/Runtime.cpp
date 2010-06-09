@@ -16,7 +16,8 @@
 // It is not safe to make runtime calls here: do so in OnCreate.
 ExtObject::ExtObject(initialObject* editObject, VRuntime* pVRuntime) :
 	renderer(pVRuntime->pRenderer),
-	unreportedError(false)
+	unreportedError(false),
+	unreportedFinish(false)
 {
 	pRuntime = pVRuntime;
 	info.editObject = editObject;

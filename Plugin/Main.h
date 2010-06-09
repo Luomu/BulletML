@@ -80,13 +80,16 @@ public:
 
 	long cFinished(LPVAL params);
 	long cOnCollision(LPVAL params);
+	long cIsRunning(LPVAL params);
 
 	long aRestart(LPVAL params);
 	long aLoad(LPVAL params);
 	long aStop(LPVAL params);
 	long aClear(LPVAL params);
+	long aPlayAndLoop(LPVAL params);
 
 	long eBulletCount(LPVAL params, ExpReturn& ret);
+	long eScriptName(LPVAL params, ExpReturn& ret);
 
 	////////////////////////////////////////////////////
 	// Data members
@@ -96,6 +99,7 @@ public:
 	float timeDelta;
 	BulletManager manager;
 	TextureHandle th;
+	bool unreportedFinish;
 
 	// For triggering "On collision" - remembering previous state
 	map<void*, set<CRunObject*> > collisionMemory;

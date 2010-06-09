@@ -7,7 +7,7 @@
 BulletManager::BulletManager() :
 	parser_(0),
 	paused_(false),
-	finished_(false),
+	finished_(true),
 	angle_(0)
 {
 	screen_.left, screen_.top = 0;
@@ -193,7 +193,7 @@ bool BulletManager::queryCollision(RECTF &box)
 	bool coll = false;
 	BOOST_FOREACH(Bullet* b, bullets())
 	{
-		if(b->spc == NOT_EXIST) continue;
+		if(b->spc == NOT_EXIST || b->spc == TOP_BULLET) continue;
 		if(PointInsideBox(b->pos.x, b->pos.y, box))
 		{
 			coll = true;
