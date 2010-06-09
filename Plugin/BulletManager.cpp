@@ -110,8 +110,7 @@ void BulletManager::move(const float timeDelta)
 	bbox_.top = 0;
 	bbox_.right = 800;
 	bbox_.bottom = 600;
-	int dx = 0;
-	int dy = 0;
+
 	BOOST_FOREACH(Bullet* b, bullets_)
 	{
 		assert(b != 0);
@@ -128,9 +127,11 @@ void BulletManager::move(const float timeDelta)
 			if(b->cmd->isEnd())
 			{
 				if(b->spc == TOP_BULLET)
-					setFinished(true);
-				removeBullet(b);
+					removeBullet(b);
+				setFinished(true);
 			}
+			else
+				setFinished(false);
 			if(b->spc == NOT_EXIST)
 			{
 				if(b->cmd)
@@ -210,5 +211,5 @@ void BulletManager::setParameters(const Parameters& newp)
 
 void BulletManager::setFinished(const bool newstate)
 {
-	finished_ = true;
+	finished_ = newstate;
 }
