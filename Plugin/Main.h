@@ -87,6 +87,7 @@ public:
 	long aStop(LPVAL params);
 	long aClear(LPVAL params);
 	long aPlayAndLoop(LPVAL params);
+	long aSetTargetPos(LPVAL params);
 
 	long eBulletCount(LPVAL params, ExpReturn& ret);
 	long eScriptName(LPVAL params, ExpReturn& ret);

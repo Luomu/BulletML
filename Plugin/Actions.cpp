@@ -48,3 +48,10 @@ long ExtObject::aLoad(LPVAL params)
 	}
 	return 0;
 }
+
+long ExtObject::aSetTargetPos(LPVAL params)
+{
+	int x = params[0].GetInt();
+	int y = params[1].GetInt();
+	return 0;
+}
