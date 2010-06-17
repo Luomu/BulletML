@@ -33,3 +33,14 @@ long ExtObject::eBulletCount(LPVAL params, ExpReturn& ret)
 {
 	return ret = manager.bullets().size();
 }
+
+//privatevar expressions
+long ExtObject::eGetValue(LPVAL params, ExpReturn& ret)
+{
+	return ret.ReturnCustom(pRuntime, privateVars[params[0].GetVariableIndex(pRuntime, pType)]);
+}
+
+long ExtObject::eNumPVs(LPVAL params, ExpReturn& ret)
+{
+	return ret = privateVars.size();
+}

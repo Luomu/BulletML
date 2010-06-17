@@ -64,6 +64,9 @@ void DefineACES(MicroAceTime* at)
 	// This line includes your common ACEs as specified in Main.h
 	ADDEXP("Bullet count", "BulletML", "BulletCount", &ExtObject::eBulletCount, RETURN_INTEGER);
 	ADDEXP("Last error string", "BulletML", "LastErrorString", &ExtObject::eErrorString, RETURN_STRING);
+	ADDPARAM(PARAM_PRIVATEVARIABLE, "'Variable name'", "Name of value.");
+	ADDEXP("Get private variable", "Private variables", "Value", &ExtObject::eGetValue, 0);
+	ADDEXP("Get private variable count", "Private variables", "NumVars", &ExtObject::eNumPVs, RETURN_VALUE);
 #include "..\Common\CommonAceTable.hpp"
 }
 
