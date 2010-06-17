@@ -45,7 +45,7 @@ void DefineACES(MicroAceTime* at)
 	ADDPARAM(PARAM_VALUE, "X", "X coordinate");
 	ADDPARAM(PARAM_VALUE, "Y", "Y coordinate");
 	ADDACT("Set target position", "BulletML",
-		"Set position for aimed bullets to target at", &ExtObject::aSetTargetPos,
+		"Set aim target at %0, %1", &ExtObject::aSetTargetPos,
 		"SetTargetPos", 0);
 
 	//Room saving
