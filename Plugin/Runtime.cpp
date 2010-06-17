@@ -56,6 +56,8 @@ void ExtObject::OnCreate()
 
 	info.pInfo->filter = info.editObject->eColor;
 
+	SetupPrivateVariableVector(pRuntime, this, privateVars);
+
 	// Update bounding box
 	pRuntime->UpdateBoundingBox(this);
 
