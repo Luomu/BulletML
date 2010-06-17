@@ -29,6 +29,8 @@ public:
 
 	Vec2f& pos() { return pos_; }
 	void setPos(const int x, const int y);
+	Vec2f& targetPos() { return targetPos_; }
+	void setTargetPos(const float x, const float y);
 	double angle() const { return angle_; }
 	void setAngle(const double);
 	RECTF& boundingBox() { return bbox_; }
@@ -52,6 +54,7 @@ private:
 	bool finished_;
 	bool paused_;
 	Vec2f pos_;
+	Vec2f targetPos_;
 	double angle_;
 	RECTF bbox_;
 	//TODO: Store parsers in a map by name

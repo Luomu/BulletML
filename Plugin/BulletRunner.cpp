@@ -31,7 +31,9 @@ double BulletCommand::getBulletDirection()
 double BulletCommand::getAimDirection()
 {
 	//direction to aim from this position to target (player) position
-	return 0;
+	float posx = manager->targetPos().x - bullet->pos.x;
+	float posy = manager->targetPos().y - bullet->pos.y;
+	return DEGREES(atan2(posy, posx));
 }
 
 double BulletCommand::getBulletSpeed()

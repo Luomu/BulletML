@@ -213,3 +213,9 @@ void BulletManager::setFinished(const bool newstate)
 {
 	finished_ = newstate;
 }
+
+void BulletManager::setTargetPos(const float x, const float y)
+{
+	targetPos_.x = x;
+	targetPos_.y = y;
+}
