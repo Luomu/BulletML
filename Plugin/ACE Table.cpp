@@ -30,6 +30,15 @@ void DefineACES(MicroAceTime* at)
 	ADDPARAM(PARAM_OBJECT, "Object name", "Name of the object");
 	ADDCND("On collision", "BulletML", "%o A bullet collides with %0", &ExtObject::cOnCollision, "OnCollision", SOL_MODIFIER);
 	ADDCND("Is running", "BulletML", "%o Script is running", &ExtObject::cIsRunning, "IsRunning", 0);
+	//privatevar conditions
+	ADDPARAM(PARAM_PRIVATEVARIABLE, "Private variable", "Select the private variable to test.");
+	ADDPARAMCOMBO("Comparison", "Select the comparison to make.", "Equal to|Not equal to|Less than|Less or equal|Greater than|Greater or equal");
+	ADDPARAM(PARAM_VALUE, "Value", "Value to compare to");
+	ADDCND("*Compare a private variable", "Private variables", "%o %n:  Value %0 %1 %2", &ExtObject::cValueCmp, "CompareValue", 0);
+	ADDPARAM(PARAM_PRIVATEVARIABLE, "Variable name", "Variable to find lowest value in.");
+	ADDCND("Pick object with lowest variable", "Private variables", "%o %n: Pick with lowest '%0'", &ExtObject::cPickLowestVar, "PickLowestVar", CND_STATIC);
+	ADDPARAM(PARAM_PRIVATEVARIABLE, "Variable name.", "Variable to find highest value in.");
+	ADDCND("Pick object with highest variable", "Private variables", "%o %n: Pick with highest '%0'", &ExtObject::cPickHighestVar, "PickHighestVar", CND_STATIC);
 
 	/////////////////////////////
 	// Actions

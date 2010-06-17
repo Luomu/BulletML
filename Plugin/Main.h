@@ -117,11 +117,9 @@ public:
 	long aSetValue(LPVAL params);
 	long aAddValue(LPVAL params);
 	long aSubValue(LPVAL params);
-	/*long cValueCmp(LPVAL params);
+	long cValueCmp(LPVAL params);
 	long cPickLowestVar(LPVAL params);
 	long cPickHighestVar(LPVAL params);
-	long cPickRandom(LPVAL params);
-	long cOn(LPVAL params);*/
 	long eGetValue(LPVAL params, ExpReturn& ret);
 	long eNumPVs(LPVAL params, ExpReturn& ret);
 };
