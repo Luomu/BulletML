@@ -54,3 +54,22 @@ long ExtObject::aSetTargetPos(LPVAL params)
 	manager.setTargetPos(params[0].GetFloat(), params[1].GetFloat());
 	return 0;
 }
+
+//Privatevar actions
+long ExtObject::aSetValue(LPVAL params)
+{
+	privateVars[params[0].GetVariableIndex(pRuntime, pType)] = params[1];
+	return 0;
+}
+
+long ExtObject::aAddValue(LPVAL params)
+{
+	privateVars[params[0].GetVariableIndex(pRuntime, pType)] += params[1];
+	return 0;
+}
+
+long ExtObject::aSubValue(LPVAL params)
+{
+	privateVars[params[0].GetVariableIndex(pRuntime, pType)] -= params[1];
+	return 0;
+}

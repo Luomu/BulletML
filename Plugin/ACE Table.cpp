@@ -47,8 +47,16 @@ void DefineACES(MicroAceTime* at)
 	ADDACT("Set target position", "BulletML",
 		"Set aim target at %0, %1", &ExtObject::aSetTargetPos,
 		"SetTargetPos", 0);
+	ADDPARAM(PARAM_PRIVATEVARIABLE, "Private variable", "Select the private variable to modify.");
+	ADDPARAM(PARAM_VALUE, "Value", "Value to add.");
+	ADDACT("Add to value", "Private variables", "Add %1 to %0", &ExtObject::aAddValue, "AddValue", 0);
+	ADDPARAM(PARAM_PRIVATEVARIABLE, "Private variable", "Select the private variable to modify.");
+	ADDPARAM(PARAM_VALUE, "Value", "Value to subtract.");
+	ADDACT("Subtract from value", "Private variables", "Subtract %1 from %0", &ExtObject::aSubValue, "SubValue", 0);
+	ADDPARAM(PARAM_PRIVATEVARIABLE, "Private variable", "Select the private variable to modify.");
+	ADDPARAM(PARAM_VALUE, "Value", "Value to store");
+	ADDACT("*Set value", "Private variables", "Set %0 to %1", &ExtObject::aSetValue, "SetValue", 0);
 
-	//Room saving
 	/////////////////////////////
 	// Expressions
 	// ADDEXP(List name, Category, Display string, Function address, Flags)

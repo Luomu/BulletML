@@ -19,7 +19,7 @@
 //OF_NOCOMMONDEBUG - Don't show 'Common' field (X/Y/W/H/Angle/Opacity) in debugger
 //OF_NODEBUG - Don't show at all in debugger
 //OF_UNDEFINEDEXPRESSIONS - Allow ReturnUndefinedExpression to be called
-#define IDE_FLAGS 	OF_ALLOWANGLES | OF_NOCOMMONDEBUG | OF_MOVEMENTS | OF_EFFECTS
+#define IDE_FLAGS 	OF_ALLOWANGLES | OF_NOCOMMONDEBUG | OF_MOVEMENTS | OF_EFFECTS | OF_PRIVATEVARIABLES
 #define COMMONACE_ANGLE
 #define COMMONACE_POSITION
 #define COMMONACE_VISIBILITY
@@ -97,6 +97,7 @@ public:
 	Parameters parameters;
 
 	// Use when private variables (OF_PRIVATEVARIABLES) are enabled.
+	vector<ExpStore> privateVars;
 	float timeDelta;
 	BulletManager manager;
 	TextureHandle th;
@@ -111,6 +112,16 @@ public:
 	long cErrorOccurred(LPVAL params);
 	long eErrorString(LPVAL params, ExpReturn& ret);
 	void RaiseConstructError(const CString& error);
+
+	//private var ACEs
+	long aSetValue(LPVAL params);
+	long aAddValue(LPVAL params);
+	long aSubValue(LPVAL params);
+	/*long cValueCmp(LPVAL params);
+	long cPickLowestVar(LPVAL params);
+	long cPickHighestVar(LPVAL params);
+	long cPickRandom(LPVAL params);
+	long cOn(LPVAL params);*/
 };
 
 //////////// EDITTIME INFO ////////////
