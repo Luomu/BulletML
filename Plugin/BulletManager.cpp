@@ -57,6 +57,7 @@ void BulletManager::restart()
 		b->parser = parser();
 		b->cmd = new BulletCommand(parser(), b);
 		b->cmd->setManager(this);
+		b->rank = rank();
 	}
 	else
 	{
