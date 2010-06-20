@@ -91,7 +91,7 @@ void BulletManager::addActiveBullet(int x, int y, double rank, int dir,
 	b->dir = dir;
 	b->spd = speed * parameters().speedMultiplier;
 	b->spc = ACTIVE_BULLET;
-	b->color = cr::color(RGB(255,0,0));
+	b->color = cr::color(RGB(255,200,200));
 }
 
 Bullet* BulletManager::getNextBullet()

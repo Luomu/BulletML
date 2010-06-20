@@ -60,6 +60,7 @@ void ExtObject::OnCreate()
 
 	// Update bounding box
 	pRuntime->UpdateBoundingBox(this);
+	info.pDisplayBoxOverride = &manager.boundingBox();
 
 	try
 	{
@@ -105,6 +106,8 @@ BOOL ExtObject::OnFrame()
 	manager.setAngle(info.angle);
 
 	updateScreenBoundaries();
+
+	pRuntime->UpdateBoundingBox(this);
 
 	try
 	{
