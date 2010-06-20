@@ -80,6 +80,14 @@ ExtObject::~ExtObject()
 {
 }
 
+void ExtObject::updateScreenBoundaries()
+{
+	manager.screen().left = pLayout->scrollX;
+	manager.screen().top = pLayout->scrollY;
+	manager.screen().right = manager.screen().left + pLayout->winWidth;
+	manager.screen().bottom = manager.screen().top + pLayout->winHeight;
+}
+
 // Called every frame, before the events and after drawing, for you to update your object if necessary
 // Return 1 (do not call again) or 0 (continue calling)
 BOOL ExtObject::OnFrame()
@@ -94,6 +102,8 @@ BOOL ExtObject::OnFrame()
 		timeDelta = 0.0f;*/
 	manager.setPos(info.x + info.HotSpotX, info.y + info.HotSpotY);
 	manager.setAngle(info.angle);
+
+	updateScreenBoundaries();
 
 	try
 	{

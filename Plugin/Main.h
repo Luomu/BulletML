@@ -124,6 +124,8 @@ public:
 	long cPickHighestVar(LPVAL params);
 	long eGetValue(LPVAL params, ExpReturn& ret);
 	long eNumPVs(LPVAL params, ExpReturn& ret);
+private:
+	void updateScreenBoundaries();
 };
 
 //////////// EDITTIME INFO ////////////
