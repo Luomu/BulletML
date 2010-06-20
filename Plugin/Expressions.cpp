@@ -44,3 +44,8 @@ long ExtObject::eNumPVs(LPVAL params, ExpReturn& ret)
 {
 	return ret = privateVars.size();
 }
+
+long ExtObject::eRank(LPVAL params, ExpReturn &ret)
+{
+	return ret = manager.rank();
+}

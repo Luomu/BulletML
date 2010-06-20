@@ -48,7 +48,7 @@ public:
 	void setPaused(const bool newp) { paused_ = newp; }
 
 	double rank() const { return rank_; }
-	void setRank(const double newr);
+	void setRank(double newr);
 
 private:
 	Bullet* getNextBullet();

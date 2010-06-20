@@ -88,9 +88,11 @@ public:
 	long aClear(LPVAL params);
 	long aPlayAndLoop(LPVAL params);
 	long aSetTargetPos(LPVAL params);
+	long aSetRank(LPVAL params);
 
 	long eBulletCount(LPVAL params, ExpReturn& ret);
 	long eScriptName(LPVAL params, ExpReturn& ret);
+	long eRank(LPVAL params, ExpReturn& ret);
 
 	////////////////////////////////////////////////////
 	// Data members

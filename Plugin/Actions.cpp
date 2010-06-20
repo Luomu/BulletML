@@ -73,3 +73,9 @@ long ExtObject::aSubValue(LPVAL params)
 	privateVars[params[0].GetVariableIndex(pRuntime, pType)] -= params[1];
 	return 0;
 }
+
+long ExtObject::aSetRank(LPVAL params)
+{
+	manager.setRank(params[0].GetDouble());
+	return 0;
+}

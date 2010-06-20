@@ -222,7 +222,8 @@ void BulletManager::setTargetPos(const float x, const float y)
 	targetPos_.y = y;
 }
 
-void BulletManager::setRank(const double newr)
+void BulletManager::setRank(double newr)
 {
+	Clamp<double>(newr, 0.0, 1.0);
 	rank_ = newr;
 }

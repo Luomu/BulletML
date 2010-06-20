@@ -65,6 +65,9 @@ void DefineACES(MicroAceTime* at)
 	ADDPARAM(PARAM_PRIVATEVARIABLE, "Private variable", "Select the private variable to modify.");
 	ADDPARAM(PARAM_VALUE, "Value", "Value to store");
 	ADDACT("*Set value", "Private variables", "Set %0 to %1", &ExtObject::aSetValue, "SetValue", 0);
+	ADDPARAM(PARAM_VALUE, "Rank (difficulty)", "Rank (difficulty) for new bullets. 0.0 - 1.0.");
+	ADDACT("Set rank", "BulletML", "Set rank to %0", &ExtObject::aSetRank,
+		"SetRank", 0);
 
 	/////////////////////////////
 	// Expressions
@@ -76,6 +79,7 @@ void DefineACES(MicroAceTime* at)
 	ADDPARAM(PARAM_PRIVATEVARIABLE, "'Variable name'", "Name of value.");
 	ADDEXP("Get private variable", "Private variables", "Value", &ExtObject::eGetValue, 0);
 	ADDEXP("Get private variable count", "Private variables", "NumVars", &ExtObject::eNumPVs, RETURN_VALUE);
+	ADDEXP("Rank", "BulletML", "Rank", &ExtObject::eRank, RETURN_FLOAT);
 #include "..\Common\CommonAceTable.hpp"
 }
 
