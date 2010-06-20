@@ -19,7 +19,7 @@ public:
 
 	void move(const float timeDelta);
 	void clean();
-	void addSimpleBullet(int x, int y, float speed, int dir);
+	void addSimpleBullet(int x, int y, float speed, int dir, double rank);
 	void addActiveBullet(int x, int y, double rank, int dir,
 						 float speed, BulletMLState* state);
 	void removeBullet(Bullet* bullet);
@@ -47,6 +47,9 @@ public:
 	bool paused() const { return paused_; }
 	void setPaused(const bool newp) { paused_ = newp; }
 
+	double rank() const { return rank_; }
+	void setRank(const double newr);
+
 private:
 	Bullet* getNextBullet();
 	std::list<Bullet*> bullets_;
@@ -56,6 +59,7 @@ private:
 	Vec2f pos_;
 	Vec2f targetPos_;
 	double angle_;
+	double rank_;
 	RECTF bbox_;
 	//TODO: Store parsers in a map by name
 	//Add checkbox to enable/disable caching

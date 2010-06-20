@@ -8,7 +8,8 @@ BulletManager::BulletManager() :
 	parser_(0),
 	paused_(false),
 	finished_(true),
-	angle_(0)
+	angle_(0),
+	rank_(0.5)
 {
 	screen_.left, screen_.top = 0;
 	screen_.right = 800;
@@ -64,7 +65,7 @@ void BulletManager::restart()
 	setFinished(false);
 }
 
-void BulletManager::addSimpleBullet(int x, int y, float speed, int direction)
+void BulletManager::addSimpleBullet(int x, int y, float speed, int direction, double rank)
 {
 	Bullet* b = getNextBullet();
 	if(!b) return;
@@ -74,6 +75,7 @@ void BulletManager::addSimpleBullet(int x, int y, float speed, int direction)
 	b->spd = speed * parameters().speedMultiplier;
 	b->dir = direction;
 	b->spc = NORMAL_BULLET;
+	b->rank = rank;
 }
 
 void BulletManager::addActiveBullet(int x, int y, double rank, int dir,
@@ -218,4 +220,9 @@ void BulletManager::setTargetPos(const float x, const float y)
 {
 	targetPos_.x = x;
 	targetPos_.y = y;
+}
+
+void BulletManager::setRank(const double newr)
+{
+	rank_ = newr;
 }

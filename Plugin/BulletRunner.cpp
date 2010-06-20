@@ -58,7 +58,7 @@ void BulletCommand::createSimpleBullet(double direction, double speed)
 	assert(bullet != 0);
 	int dir = static_cast<int>(direction);
 	float spd = static_cast<float>(speed);
-	manager->addSimpleBullet(bullet->pos.x, bullet->pos.y, spd, dir);
+	manager->addSimpleBullet(bullet->pos.x, bullet->pos.y, spd, dir, manager->rank());
 }
 
 void BulletCommand::createBullet(BulletMLState *state, double direction, double speed)
@@ -69,7 +69,7 @@ void BulletCommand::createBullet(BulletMLState *state, double direction, double 
 	float spd = static_cast<float>(speed);
 	manager->addActiveBullet(bullet->pos.x,
 							 bullet->pos.y,
-							 bullet->rank,
+							 manager->rank(),
 							 dir, spd, state);
 }
 
