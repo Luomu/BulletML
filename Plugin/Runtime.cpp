@@ -64,6 +64,7 @@ void ExtObject::OnCreate()
 	try
 	{
 		manager.setParameters(parameters);
+		manager.setAngle(info.angle);
 	}
 	catch(BulletMLError& berror)
 	{
