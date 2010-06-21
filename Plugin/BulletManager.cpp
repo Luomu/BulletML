@@ -57,7 +57,7 @@ void BulletManager::restart()
 		b->parser = parser();
 		b->cmd = new BulletCommand(parser(), b);
 		b->cmd->setManager(this);
-		b->rank = rank();
+		b->rank = this->rank();
 	}
 	else
 	{
@@ -76,7 +76,7 @@ void BulletManager::addSimpleBullet(int x, int y, float speed, int direction, do
 	b->spd = speed * parameters().speedMultiplier;
 	b->dir = direction;
 	b->spc = NORMAL_BULLET;
-	b->rank = rank;
+	b->rank = this->rank();
 }
 
 void BulletManager::addActiveBullet(int x, int y, double rank, int dir,
@@ -84,6 +84,7 @@ void BulletManager::addActiveBullet(int x, int y, double rank, int dir,
 {
 	Bullet* b = getNextBullet();
 	if(!b) return;
+	b->rank = this->rank();
 	b->cmd = new BulletCommand(state, b);
 	b->cmd->setManager(this);
 	b->pos.x = x;
