@@ -32,6 +32,8 @@ void ExtObject::Draw()
 #ifndef _DEBUG
 		if(bullet->spc == NOT_EXIST || bullet->spc == TOP_BULLET) continue;
 #endif
+		if(bullet->cObject != 0)
+			continue; // TODO: maybe bad
 		cr::color col = bullet->color;
 		col *= info.pInfo->filter;
 		if(parameters.allowRotations && bullet->dir != 0)

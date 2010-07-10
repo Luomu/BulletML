@@ -17,7 +17,8 @@
 ExtObject::ExtObject(initialObject* editObject, VRuntime* pVRuntime) :
 	renderer(pVRuntime->pRenderer),
 	unreportedError(false),
-	unreportedFinish(false)
+	unreportedFinish(false),
+	manager(this)
 {
 	pRuntime = pVRuntime;
 	info.editObject = editObject;

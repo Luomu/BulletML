@@ -12,6 +12,7 @@ public:
 	Bullet();
 	~Bullet();
 	bool readyForDeletion();
+	void updateCObject();
 	Vec2f pos;
 	int spd;
 	double dir;
@@ -25,6 +26,7 @@ public:
 	Vec2f vel; //acc
 	float lifetime;
 	cr::color color;
+	CRunObject* cObject;
 
 	BulletMLParser* parser;
 };

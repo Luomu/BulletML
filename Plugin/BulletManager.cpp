@@ -4,12 +4,14 @@
 #include "bulletml/bulletmlerror.h"
 #include "BulletManager.h"
 
-BulletManager::BulletManager() :
+BulletManager::BulletManager(CRunObject* newp) :
 	parser_(0),
 	paused_(false),
 	finished_(true),
 	angle_(0),
-	rank_(0.5)
+	rank_(0.5),
+	parent_(newp),
+	cObjectType_(0)
 {
 	screen_.left, screen_.top = 0;
 	screen_.right = 800;
@@ -99,6 +101,14 @@ Bullet* BulletManager::getNextBullet()
 {
 	Bullet* newb = new Bullet();
 	bullets_.push_back(newb);
+	cObjectType_ = parent()->pRuntime->GetTypeFromName("ding");
+	if(cObjectType() != 0)
+	{
+		newb->cObject = parent()->pRuntime->CreateObject(cObjectType(),
+			parent()->info.layer,
+			parent()->pLayout);
+		assert(newb->cObject != 0);
+	}
 	return newb;
 }
 
@@ -149,7 +159,9 @@ void BulletManager::move(const float timeDelta)
 		b->pos.x += cos(RADIANS(b->dir)) * b->spd * timeDelta + b->vel.x * timeDelta;
 		b->pos.y += sin(RADIANS(b->dir)) * b->spd * timeDelta + b->vel.y * timeDelta;
 		b->cnt++;
-
+		b->updateCObject();
+		if(b->cObject != 0)
+			parent()->pRuntime->UpdateBoundingBox(b->cObject);
 		b->lifetime += timeDelta * 1000;
 
 		if(b->lifetime > parameters_.maxLifeTime && b->cmd == 0) removeBullet(b);
@@ -167,6 +179,11 @@ void BulletManager::removeBullet(Bullet* b)
 {
 	assert(b != 0);
 	b->spc = NOT_EXIST;
+	if(b->cObject != 0)
+	{
+		parent()->pRuntime->DestroyObject(b->cObject);
+		b->cObject = 0;
+	}
 }
 
 void BulletManager::clean()
@@ -228,4 +245,9 @@ void BulletManager::setRank(double newr)
 {
 	Clamp<double>(newr, 0.0, 1.0);
 	rank_ = newr;
+}
+
+void BulletManager::setCObjectType(CRunObjType* newt)
+{
+	cObjectType_ = newt;
 }

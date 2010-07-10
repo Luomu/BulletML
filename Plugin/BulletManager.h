@@ -9,7 +9,7 @@ class BulletMLParser;
 class BulletManager
 {
 public:
-	BulletManager();
+	BulletManager(CRunObject*);
 	~BulletManager();
 	std::list<Bullet*>& bullets() { return bullets_; }
 	BulletMLParser* parser() const { return parser_; }
@@ -50,6 +50,10 @@ public:
 	double rank() const { return rank_; }
 	void setRank(double newr);
 
+	CRunObject* parent() const { return parent_; }
+	CRunObjType* cObjectType() const { return cObjectType_; }
+	void setCObjectType(CRunObjType*);
+
 private:
 	Bullet* getNextBullet();
 	std::list<Bullet*> bullets_;
@@ -67,4 +71,7 @@ private:
 
 	Parameters parameters_;
 	RECTF screen_;
+
+	CRunObject* parent_;
+	CRunObjType* cObjectType_;
 };
