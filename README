@@ -1,0 +1,139 @@
+BulletML Construct plugin -- Release 1.00 (Preview)
+
+http://paahdin.com/projects/bulletml/BulletML-1.00.zip
+- Download plugin zip
+
+http://paahdin.com/projects/bulletml/Demo.zip
+- Download example (exe & .cap), you can modify the xml files to 
+change the patterns.
+
+http://github.com/Luomu/BulletML
+- Source code
+
+http://paahdin.com/projects/bulletml/images/select.png
+[shot from example app - aircraft sprites by Mark Simpson]
+
+* What is BulletML?
+
+Bullet Markup Language is an XML-based system for describing bullet 
+barrages in shoot 'em up games. It is designed by the prolific 
+shooting game author Kenta Cho.
+
+http://www.asahi-net.or.jp/~cs8k-cyu/index_e.html
+
+The BulletML page can be found at 
+http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/index_e.html.
+
+Here's an example:
+
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+    <action label="top">
+        <fire>
+            <bullet>
+                <direction type="absolute">90</direction>
+            </bullet>
+        </fire>
+    </action>
+</bulletml>
+
+This script fires one bullet at angle 90, default speed. Not terribly 
+useful yet. Here's a more complex example:
+
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml.dtd">
+<bulletml xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+    <action label="top">
+        <fire>
+            <direction type="aim">0</direction>
+            <speed>150</speed>
+            <bulletRef label="seed" />
+        </fire>
+    </action>
+
+    <bullet label="seed">
+        <action>
+            <repeat>
+                <times>100</times>
+                <action>
+                    <fire>
+                        <direction type="absolute">$rand * 360</direction>
+                        <speed>200 + $rank * 200</speed>
+                        <bullet />
+                    </fire>
+                </action>
+                <wait>50</wait>
+            </repeat>
+        </action>
+    </bullet>
+</bulletml>
+
+This script fires a slow-moving bullet that in turn spawns 100 other 
+bullets at 50ms intervals, in random directions. The speed of these 
+bullets depends on the difficulty level (rank).
+
+
+* About this plugin
+
+This plugins adds a BulletML object that can read and play BulletML 
+files. It is a bit like the existing particle system object; you can 
+have multiple emitters and each object renders its own bullets.
+
+While any bullet pattern could be created with events, describing them 
+with external files is more reusable and they can be modified without 
+changing the .cap.
+
+* Appearance
+
+You can change the bullet texture and size. Standard colour filter, 
+opacity and effects are also available.
+
+* Collisions
+
+This object has its own collision condition. All collisions are bullet 
+point against object bounding box. Arcade shoot 'em up games usually 
+use hidden hitboxes that are smaller than the player craft.
+
+Bullets are destroyed when they collide with an object.
+
+* Directions, targeting
+
+(absolute directions) When script type is "vertical" 0 is right and 90 
+down. With "horizontal" 0 is up and 90 right.
+
+If you want the bullets to fly in the direction the emitter is 
+pointing, use "relative" direction and angle 0.
+
+When no direction is specified, "aim" is assumed; bullet flies to the 
+x,y coordinate set by "Set target position" action.
+
+* Lifetime
+
+Bullets are destroyed when they collide, exit the screen (toggleable) 
+or a number of milliseconds is exceeded (configurable).
+
+* Units
+
+Speeds are pixels per second, time units are milliseconds. The BML spec 
+treats time values as frames for some reason but this wouldn't be very 
+useful when frame rate can be anything from tens to hundreds.
+
+Separate multiplier values are provided for speeds and time values.
+
+* Error reporting
+
+This object has a "On error occurred" condition and "Last error 
+string" expression. Useful for spotting XML errors.
+
+* Limitations, known issues
+- BulletML does not define a bullet's appearance. Maybe it could be 
+added (but it would break compatibility).
+- If you destroy a BulletML object all its bullets are destroyed as 
+well. You might want to wait until the bullet count is zero. I can 
+probably add a smarter Destroy action.
+- changing the filter color affects the currently existing bullets as 
+well. While consistent with Construct, it might be more useful to have 
+a separate color property and Set Color action.
+- bug: if a script contains "vanish" action, Finished condition does 
+not always trigger.
