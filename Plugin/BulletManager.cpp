@@ -101,7 +101,6 @@ Bullet* BulletManager::getNextBullet()
 {
 	Bullet* newb = new Bullet();
 	bullets_.push_back(newb);
-	cObjectType_ = parent()->pRuntime->GetTypeFromName("ding");
 	if(cObjectType() != 0)
 	{
 		newb->cObject = parent()->pRuntime->CreateObject(cObjectType(),
@@ -254,5 +253,6 @@ void BulletManager::setRank(double newr)
 
 void BulletManager::setCObjectType(CRunObjType* newt)
 {
-	cObjectType_ = newt;
+	if(newt != 0)
+		cObjectType_ = newt;
 }

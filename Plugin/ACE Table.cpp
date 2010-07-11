@@ -68,6 +68,9 @@ void DefineACES(MicroAceTime* at)
 	ADDPARAM(PARAM_VALUE, "Rank (difficulty)", "Rank (difficulty) for new bullets. 0.0 - 1.0.");
 	ADDACT("Set rank", "BulletML", "Set rank to %0", &ExtObject::aSetRank,
 		"SetRank", 0);
+	ADDPARAM(PARAM_OBJECT, "Object", "Object type to use as bullet.");
+	ADDACT("Set bullet object type", "BulletML", "Set %0 as bullet object type",
+		&ExtObject::aSetBulletObject, "SetBulletObject", 0);
 
 	/////////////////////////////
 	// Expressions

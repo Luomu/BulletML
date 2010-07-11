@@ -79,3 +79,9 @@ long ExtObject::aSetRank(LPVAL params)
 	manager.setRank(params[0].GetDouble());
 	return 0;
 }
+
+long ExtObject::aSetBulletObject(LPVAL params)
+{
+	manager.setCObjectType(params[0].GetObjectParam(pRuntime));
+	return 0;
+}
