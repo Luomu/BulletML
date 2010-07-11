@@ -159,9 +159,14 @@ void BulletManager::move(const float timeDelta)
 		b->pos.x += cos(RADIANS(b->dir)) * b->spd * timeDelta + b->vel.x * timeDelta;
 		b->pos.y += sin(RADIANS(b->dir)) * b->spd * timeDelta + b->vel.y * timeDelta;
 		b->cnt++;
-		b->updateCObject();
 		if(b->cObject != 0)
-			parent()->pRuntime->UpdateBoundingBox(b->cObject);
+		{
+			b->updateCObject();
+			if(b->cObject == 0)
+				removeBullet(b);
+			else
+				parent()->pRuntime->UpdateBoundingBox(b->cObject);
+		}
 		b->lifetime += timeDelta * 1000;
 
 		if(b->lifetime > parameters_.maxLifeTime && b->cmd == 0) removeBullet(b);
