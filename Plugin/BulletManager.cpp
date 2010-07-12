@@ -79,6 +79,13 @@ void BulletManager::addSimpleBullet(int x, int y, float speed, int direction, do
 	b->dir = direction;
 	b->spc = NORMAL_BULLET;
 	b->rank = this->rank();
+	if(cObjectType() != 0)
+	{
+		b->cObject = parent()->pRuntime->CreateObject(cObjectType(),
+			parent()->info.layer,
+			parent()->pLayout);
+		assert(b->cObject != 0);
+	}
 }
 
 void BulletManager::addActiveBullet(int x, int y, double rank, int dir,
@@ -95,19 +102,19 @@ void BulletManager::addActiveBullet(int x, int y, double rank, int dir,
 	b->spd = speed * parameters().speedMultiplier;
 	b->spc = ACTIVE_BULLET;
 	b->color = cr::color(RGB(255,200,200));
+	if(cObjectType() != 0)
+	{
+		b->cObject = parent()->pRuntime->CreateObject(cObjectType(),
+			parent()->info.layer,
+			parent()->pLayout);
+		assert(b->cObject != 0);
+	}
 }
 
 Bullet* BulletManager::getNextBullet()
 {
 	Bullet* newb = new Bullet();
 	bullets_.push_back(newb);
-	if(cObjectType() != 0)
-	{
-		newb->cObject = parent()->pRuntime->CreateObject(cObjectType(),
-			parent()->info.layer,
-			parent()->pLayout);
-		assert(newb->cObject != 0);
-	}
 	return newb;
 }
 
@@ -255,4 +262,12 @@ void BulletManager::setCObjectType(CRunObjType* newt)
 {
 	if(newt != 0)
 		cObjectType_ = newt;
+}
+
+void BulletManager::removeAllBullets()
+{
+	BOOST_FOREACH(Bullet* b, bullets())
+	{
+		removeBullet(b);
+	}
 }

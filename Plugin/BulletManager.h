@@ -18,6 +18,7 @@ public:
 	bool queryCollision(RECTF& box);
 
 	void move(const float timeDelta);
+	void removeAllBullets();
 	void clean();
 	void addSimpleBullet(int x, int y, float speed, int dir, double rank);
 	void addActiveBullet(int x, int y, double rank, int dir,

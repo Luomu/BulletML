@@ -20,8 +20,7 @@ long ExtObject::aStop(LPVAL params)
 
 long ExtObject::aClear(LPVAL params)
 {
-	RaiseConstructError("Not implemented");
-	//manager.clean();
+	manager.removeAllBullets();
 	return 0;
 }
 

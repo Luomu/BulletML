@@ -33,7 +33,7 @@ void ExtObject::Draw()
 		if(bullet->spc == NOT_EXIST || bullet->spc == TOP_BULLET) continue;
 #endif
 		if(bullet->cObject != 0)
-			continue; // TODO: maybe bad
+			continue;
 		cr::color col = bullet->color;
 		col *= info.pInfo->filter;
 		if(parameters.allowRotations && bullet->dir != 0)
@@ -50,8 +50,7 @@ void ExtObject::Draw()
 	renderer->SetPointSize(oldptsize);
 
 #ifdef _DEBUG
-	// Draw a simple rectangle
-	//renderer->Box(cr::rect(info.x, info.y, info.x + info.w, info.y + info.h), cr::color(50, 0, 0, 0), info.angle);
+	//Draw yellow widget to indicate emitter direction
 	float startx = info.x + info.HotSpotX;
 	float starty = info.y + info.HotSpotY;
 	float endx = startx + cos(RADIANS(info.angle)) * 50;
@@ -75,6 +74,7 @@ void ExtObject::Draw()
 // Draw your object in the layout editor.
 void EditExt::Draw()
 {
+	//Draw a yellow triangle to indicate emitter direction
 	D3DCOLOR col = D3D_CONVERTCOLORREF(RGB(200, 200, 0));
 	pEditTime->SetTexture(-1);
 	float x = pInfo->objectX;
