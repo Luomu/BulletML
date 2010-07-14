@@ -106,7 +106,7 @@ BOOL ExtObject::OnFrame()
 	timeDelta = pRuntime->GetTimeDelta();
 	/*if (timeDelta > 0.5f)
 		timeDelta = 0.0f;*/
-	elapsedDelay += timeDelta;
+	elapsedDelay += timeDelta * 1000;
 	manager.setPos(info.x + info.HotSpotX, info.y + info.HotSpotY);
 	manager.setAngle(info.angle);
 

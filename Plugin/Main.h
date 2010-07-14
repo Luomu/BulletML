@@ -127,9 +127,11 @@ public:
 	long eNumPVs(LPVAL params, ExpReturn& ret);
 private:
 	void updateScreenBoundaries();
+	void loadScript(const CString&);
 	int loops;
 	int loopDelay;
 	float elapsedDelay;
+	CString scriptName;
 };
 
 //////////// EDITTIME INFO ////////////

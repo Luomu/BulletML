@@ -26,25 +26,7 @@ long ExtObject::aClear(LPVAL params)
 
 long ExtObject::aLoad(LPVAL params)
 {
-	CT2CA filename(params[0].GetString());
-	try
-	{
-		manager.load(std::string(filename));
-	}
-	catch(BulletMLError& berror)
-	{
-		CString errorstring("Error while loading or parsing " + params[0].GetString() + ": ");
-		errorstring += berror.what();
-		RaiseConstructError(errorstring);
-	}
-	catch(std::exception& stex)
-	{
-		RaiseConstructError(stex.what());
-	}
-	catch(...)
-	{
-		RaiseConstructError("Cannot load or parse " + params[0].GetString() + ". Unknown error.");
-	}
+	loadScript(params[0].GetString());
 	return 0;
 }
 
@@ -87,10 +69,40 @@ long ExtObject::aSetBulletObject(LPVAL params)
 
 long ExtObject::aPlayAndLoop(LPVAL params)
 {
-	CString scriptName = params[0].GetString();
+	CString newScript = params[0].GetString();
+	if(newScript != scriptName)
+	{
+		loadScript(newScript);
+	}
 	loops = params[1].GetInt();
 	loopDelay = params[2].GetInt();
 	unreportedFinish = true;
 	manager.restart();
+	elapsedDelay = 0.f;
+	loops--;
 	return 0;
+}
+
+void ExtObject::loadScript(const ATL::CString &sname)
+{
+	CT2CA filename(sname);
+	scriptName = sname;
+	try
+	{
+		manager.load(std::string(filename));
+	}
+	catch(BulletMLError& berror)
+	{
+		CString errorstring("Error while loading or parsing " + sname + ": ");
+		errorstring += berror.what();
+		RaiseConstructError(errorstring);
+	}
+	catch(std::exception& stex)
+	{
+		RaiseConstructError(stex.what());
+	}
+	catch(...)
+	{
+		RaiseConstructError("Cannot load or parse " + sname + ". Unknown error.");
+	}
 }
