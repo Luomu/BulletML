@@ -127,6 +127,9 @@ public:
 	long eNumPVs(LPVAL params, ExpReturn& ret);
 private:
 	void updateScreenBoundaries();
+	int loops;
+	int loopDelay;
+	float elapsedDelay;
 };
 
 //////////// EDITTIME INFO ////////////

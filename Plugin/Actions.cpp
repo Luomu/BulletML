@@ -84,3 +84,13 @@ long ExtObject::aSetBulletObject(LPVAL params)
 	manager.setCObjectType(params[0].GetObjectParam(pRuntime));
 	return 0;
 }
+
+long ExtObject::aPlayAndLoop(LPVAL params)
+{
+	CString scriptName = params[0].GetString();
+	loops = params[1].GetInt();
+	loopDelay = params[2].GetInt();
+	unreportedFinish = true;
+	manager.restart();
+	return 0;
+}

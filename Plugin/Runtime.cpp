@@ -18,7 +18,10 @@ ExtObject::ExtObject(initialObject* editObject, VRuntime* pVRuntime) :
 	renderer(pVRuntime->pRenderer),
 	unreportedError(false),
 	unreportedFinish(false),
-	manager(this)
+	manager(this),
+	loops(0),
+	loopDelay(0),
+	elapsedDelay(0.f)
 {
 	pRuntime = pVRuntime;
 	info.editObject = editObject;
@@ -103,6 +106,7 @@ BOOL ExtObject::OnFrame()
 	timeDelta = pRuntime->GetTimeDelta();
 	/*if (timeDelta > 0.5f)
 		timeDelta = 0.0f;*/
+	elapsedDelay += timeDelta;
 	manager.setPos(info.x + info.HotSpotX, info.y + info.HotSpotY);
 	manager.setAngle(info.angle);
 
@@ -112,6 +116,13 @@ BOOL ExtObject::OnFrame()
 
 	try
 	{
+		if(elapsedDelay > loopDelay && loops > 0)
+		{
+			unreportedFinish = true;
+			manager.restart();
+			loops--;
+			elapsedDelay = 0.f;
+		}
 		manager.move(timeDelta);
 		manager.clean();
 	}

@@ -71,6 +71,12 @@ void DefineACES(MicroAceTime* at)
 	ADDPARAM(PARAM_OBJECT, "Object", "Object type to use as bullet.");
 	ADDACT("Set bullet object type", "BulletML", "Set %0 as bullet object type",
 		&ExtObject::aSetBulletObject, "SetBulletObject", 0);
+	ADDPARAM(PARAM_STRING, "File name", "BulletML file to load.");
+	ADDPARAM(PARAM_VALUE, "Times", "Number of times to play the file");
+	ADDPARAM(PARAM_VALUE, "Delay", "Milliseconds to wait between repeats");
+	ADDACT("Play and loop file with delay", "BulletML",
+		"Play %0 %1 times with delay %2", &ExtObject::aPlayAndLoop,
+		"PlayAndLoop", 0);
 
 	/////////////////////////////
 	// Expressions
