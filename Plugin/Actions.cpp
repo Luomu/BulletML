@@ -14,6 +14,9 @@ long ExtObject::aRestart(LPVAL params)
 
 long ExtObject::aStop(LPVAL params)
 {
+	loops = 0;
+	elapsedDelay = 0;
+	loopDelay = 0;
 	manager.setPaused(true);
 	return 0;
 }
