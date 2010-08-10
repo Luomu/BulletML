@@ -178,7 +178,7 @@ void BulletManager::move(const float timeDelta)
 		if(b->lifetime > parameters_.maxLifeTime && b->cmd == 0) removeBullet(b);
 
 		//out of bounds check
-		if(parameters_.destroyOutsideScreen && b->cmd == 0)
+		if(parameters_.destroyOutsideScreen && b->lifetime > 2000)
 		{
 			if(!PointInsideBox(b->pos.x, b->pos.y, screen()))
 				removeBullet(b);
