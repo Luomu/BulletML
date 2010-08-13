@@ -28,6 +28,8 @@ public:
 	bool finished() const { return finished_; }
 	void setFinished(const bool);
 
+	void checkForDeadCObjects();
+
 	Vec2f& pos() { return pos_; }
 	void setPos(const int x, const int y);
 	Vec2f& targetPos() { return targetPos_; }

@@ -271,3 +271,18 @@ void BulletManager::removeAllBullets()
 		removeBullet(b);
 	}
 }
+
+void BulletManager::checkForDeadCObjects()
+{
+	BOOST_FOREACH(Bullet* b, bullets())
+	{
+		if(b->cObject != 0)
+		{
+			if(b->cObject->info.destroying)
+			{
+				b->cObject = 0;
+				removeBullet(b);
+			}
+		}
+	}
+}

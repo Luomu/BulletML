@@ -145,7 +145,8 @@ BOOL ExtObject::OnFrame()
 // you must reset the pointer to NULL as it is no longer valid.
 BOOL ExtObject::OnFrame2()
 {
-	return 1;	// Do not call again
+	manager.checkForDeadCObjects();
+	return 0;	// Do not call again
 }
 
 // WindowProc:  called when a window message, or WM_COMMAND specifying your window,

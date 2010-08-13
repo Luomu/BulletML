@@ -23,7 +23,6 @@ Bullet::Bullet() :
 
 Bullet::~Bullet()
 {
-	//assert(cmd == 0);
 	if(cmd != 0)
 	{
 		delete cmd;
