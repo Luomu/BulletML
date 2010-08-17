@@ -1,17 +1,13 @@
-BulletML Construct plugin -- Release 1.00 (Preview)
+BulletML Construct plugin -- Release 1.02
 
-http://paahdin.com/projects/bulletml/BulletML-1.00.zip
-- Download plugin zip
+Download plugin:
+http://paahdin.com/projects/bulletml/BulletML-1.02.zip
 
-http://paahdin.com/projects/bulletml/Demo.zip
-- Download example (exe & .cap), you can modify the xml files to 
-change the patterns.
-
+Source code:
 http://github.com/Luomu/BulletML
-- Source code
 
-http://paahdin.com/projects/bulletml/images/select.png
-[shot from example app - aircraft sprites by Mark Simpson]
+Demo game:
+http://paahdin.com/projects/bulletml/demo
 
 * What is BulletML?
 
@@ -73,12 +69,13 @@ This script fires a slow-moving bullet that in turn spawns 100 other
 bullets at 50ms intervals, in random directions. The speed of these 
 bullets depends on the difficulty level (rank).
 
+Check the demo game for a variety of patterns.
 
 * About this plugin
 
 This plugins adds a BulletML object that can read and play BulletML 
 files. It is a bit like the existing particle system object; you can 
-have multiple emitters and each object renders its own bullets.
+have multiple emitters and each object manages its own bullets.
 
 While any bullet pattern could be created with events, describing them 
 with external files is more reusable and they can be modified without 
@@ -86,14 +83,16 @@ changing the .cap.
 
 * Appearance
 
-You can change the bullet texture and size. Standard colour filter, 
-opacity and effects are also available.
+You can either let the emitter render the bullets (just like a particle
+system) by setting a texture or you can replace the bullets with
+Sprite objects.
 
 * Collisions
 
-This object has its own collision condition. All collisions are bullet 
-point against object bounding box. Arcade shoot 'em up games usually 
-use hidden hitboxes that are smaller than the player craft.
+If you are not using Sprites as bullets this object has its own collision
+condition. All collisions are bullet point against object bounding box.
+Arcade shoot 'em up games usually use hidden hitboxes that are smaller
+than the player craft.
 
 Bullets are destroyed when they collide with an object.
 
@@ -105,13 +104,17 @@ down. With "horizontal" 0 is up and 90 right.
 If you want the bullets to fly in the direction the emitter is 
 pointing, use "relative" direction and angle 0.
 
-When no direction is specified, "aim" is assumed; bullet flies to the 
-x,y coordinate set by "Set target position" action.
+When no direction is specified, BulletML spec assumes "aim" is assumed;
+bullet flies to the x,y coordinate set by "Set target position" action.
 
 * Lifetime
 
-Bullets are destroyed when they collide, exit the screen (toggleable) 
-or a number of milliseconds is exceeded (configurable).
+Bullets are destroyed when they collide, exit the screen (toggleable),
+their associated Sprite is destroyed or a set number of milliseconds is
+exceeded.
+
+If you Destroy the emitter, all its associated bullets vanish. This is a
+technical limitation, but not too tricky to work around.
 
 * Units
 
@@ -121,19 +124,10 @@ useful when frame rate can be anything from tens to hundreds.
 
 Separate multiplier values are provided for speeds and time values.
 
-* Error reporting
+* Learning BulletML
 
-This object has a "On error occurred" condition and "Last error 
-string" expression. Useful for spotting XML errors.
-
-* Limitations, known issues
-- BulletML does not define a bullet's appearance. Maybe it could be 
-added (but it would break compatibility).
-- If you destroy a BulletML object all its bullets are destroyed as 
-well. You might want to wait until the bullet count is zero. I can 
-probably add a smarter Destroy action.
-- changing the filter color affects the currently existing bullets as 
-well. While consistent with Construct, it might be more useful to have 
-a separate color property and Set Color action.
-- bug: if a script contains "vanish" action, Finished condition does 
-not always trigger.
+Reading just the reference is not very good for learning the capabilities
+of this system. Check out the demo game, this Java-based demo applet
+http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/bulletml_applet_e.html or
+download some of Kenta Cho's games - many of them contain BulletML files
+you can take apart.
